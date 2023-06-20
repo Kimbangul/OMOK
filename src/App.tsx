@@ -1,13 +1,10 @@
-import Button from "./components/common/Button";
 import Table from "./components/table/Table";
+import InputContainer from "./components/info/InputContainer";
 
 function App() {
   return (
       <section>
-        <div>
-          <input type="number" /><input type="number" />
-          <Button>button</Button>
-        </div>
+        <InputContainer />
         <div>
           <Table />
         </div>
