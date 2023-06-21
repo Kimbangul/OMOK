@@ -1,8 +1,8 @@
 import { ButtonPropsType } from "./type"
 
-const Button = ({children}: ButtonPropsType) => {
+const Button = ({children, type}: ButtonPropsType) => {
   return(
-    <button>{children}</button>
+    <button type={type}>{children}</button>
   )
 }
 
