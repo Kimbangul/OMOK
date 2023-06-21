@@ -1,11 +1,16 @@
 import Cell from "../cell/Cell";
+import { RowPropsType } from "./type";
 
-const Row = () => {
+const Row = ({cell, rowNum} : RowPropsType) => {
   return (
     <tr>
-      <Cell />
-      <Cell />
-      <Cell />
+      {
+        Array(cell).fill('').map((el,idx)=> {
+          return(
+            <Cell key={`row${rowNum}cell${idx}`}/>
+          )
+        })
+      }
     </tr>
   )
 }

@@ -31,9 +31,9 @@ const InputContainer = () => {
     {
       stage === 'ready' &&
       <form onSubmit={setStartStage}>
-        행: <input type="number" maxLength={2} ref={inputSelector.row}/> 
+        행: <input type="number" min={5} maxLength={2} ref={inputSelector.row} /> 
         <br />
-        열: <input type="number" maxLength={2} ref={inputSelector.cell}/>
+        열: <input type="number" min={5} maxLength={2} ref={inputSelector.cell}/>
         <Button type="submit">button</Button>
       </form>
     }
@@ -41,8 +41,6 @@ const InputContainer = () => {
       stage === 'start' &&
       <div>
         {input.row} * {input.cell}
-
-        <img src="" alt="" />
       </div>
     }
     </>

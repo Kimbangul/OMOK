@@ -1,9 +1,13 @@
+import { CellStyle as C } from "./CellStyle";
+
 const Cell = () => {
   return (
-    <td>
+    <C.Container>
       
-    </td>
+    </C.Container>
   )
 }
+
+
 
 export default Cell;
