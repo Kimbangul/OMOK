@@ -7,7 +7,7 @@ const Row = ({cell, rowNum} : RowPropsType) => {
       {
         Array(cell).fill('').map((el,idx)=> {
           return(
-            <Cell key={`row${rowNum}cell${idx}`}/>
+            <Cell key={`row${rowNum}cell${idx}`} cellNum={idx} rowNum={rowNum}/>
           )
         })
       }

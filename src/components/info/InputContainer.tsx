@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import {useRecoilState} from "recoil";
-import { inputState, InputStateType, stageState, StageStateType } from "../../recoil/stage";
+import { BLACK, inputState, InputStateType, playerState, gameState, GameStateType, stageState } from "../../recoil/stage";
 import Button from "../common/Button";
 import { InputSelectorType } from "./type";
 
@@ -11,26 +11,32 @@ const InputContainer = () => {
   }
 
   // PARAM state
-  const [stage, setStage] = useRecoilState<StageStateType>(stageState);
+  const [game, setGame] = useRecoilState<GameStateType>(gameState);
   const [input, setInput] = useRecoilState<InputStateType>(inputState);
+  const [player, setPlayer] = useRecoilState(playerState);
+  const [table, setTable] = useRecoilState(stageState)
 
   // FUNCTION 시작 및 input정보 바인딩
-  const setStartStage = (e: React.FormEvent) => {
+  const setStartGame = (e: React.FormEvent) => {
     e.preventDefault();
+    const rowNum = Number(inputSelector.row.current?.value) || 10;
+    const cellNum = Number(inputSelector.cell.current?.value) || 10;
+
     setInput(
       {...input, 
-       row: Number(inputSelector.row.current?.value) || 0, 
-       cell: Number(inputSelector.cell.current?.value) || 0, 
+       row: rowNum, 
+       cell: cellNum, 
      }
     );
-    setStage('start');
+    setGame('start');
+    setTable(Array(rowNum).fill(Array(cellNum).fill(null)));
   }
 
   return(
     <>
     {
-      stage === 'ready' &&
-      <form onSubmit={setStartStage}>
+      game === 'ready' &&
+      <form onSubmit={setStartGame}>
         행: <input type="number" min={5} maxLength={2} ref={inputSelector.row} /> 
         <br />
         열: <input type="number" min={5} maxLength={2} ref={inputSelector.cell}/>
@@ -38,9 +44,10 @@ const InputContainer = () => {
       </form>
     }
     {
-      stage === 'start' &&
+      game === 'start' &&
       <div>
-        {input.row} * {input.cell}
+        <div>{input.row} * {input.cell}</div>
+        <div>현재 플레이어 : {player === BLACK ? '⚫' : '⚪'}</div>
       </div>
     }
     </>

@@ -10,6 +10,9 @@ export const CellStyle = {
     border: 0.1rem solid #000;
     cursor: pointer;
 
+    text-align: center;
+    font-size: 3.2rem;
+
     &:hover{
       border: 0.1rem solid pink;
     }

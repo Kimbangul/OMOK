@@ -1,10 +1,10 @@
 import {useRecoilState} from "recoil";
-import { StageStateType, stageState, inputState, InputStateType } from "../../recoil/stage";
+import { GameStateType, gameState, inputState, InputStateType } from "../../recoil/stage";
 import Row from "../row/Row";
 import { TableStyle as T } from "./TableStyle";
 
 const Table = () => {
-  const [stage, setStage] = useRecoilState<StageStateType>(stageState);
+  const [stage, setStage] = useRecoilState<GameStateType>(gameState);
   const [table, setTable] = useRecoilState<InputStateType>(inputState);
 
   return (
@@ -12,6 +12,8 @@ const Table = () => {
       {
       stage === 'start' &&
         <T.Container>
+          <thead></thead>
+          <tbody>
           {
             Array(table.row).fill('').map((el, idx) => {
               return(
@@ -19,6 +21,7 @@ const Table = () => {
               )
             })
           }
+          </tbody>
         </T.Container>
       }
     </>

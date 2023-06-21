@@ -3,7 +3,19 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
  html{
   font-size: 62.5%; 
+  transition: font-size 0.3s;
 
+  @media(max-width: 768px){
+    font-size: 58%;
+  }
+
+  @media(max-width: 500px){
+    font-size: 50%;
+  }
+
+  @media(max-width: 375px){
+    font-size: 45%;
+  }
  }
  *{
     margin: 0;
