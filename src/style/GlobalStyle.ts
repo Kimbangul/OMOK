@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
  html{
@@ -48,6 +48,5 @@ const GlobalStyle = createGlobalStyle`
     /* font-family: 'Montserrat', 'Noto Sans KR', sans-serif; */
   }
 `;
-
 
 export default GlobalStyle;

@@ -1,14 +1,15 @@
 import Table from "./components/table/Table";
 import InputContainer from "./components/info/InputContainer";
+import { AppStyle as A } from "./style/AppStyle";
 
 function App() {
   return (
-      <section>
+      <A.Container>
         <InputContainer />
         <div>
           <Table />
         </div>
-      </section>
+      </A.Container>
   );
 }
 

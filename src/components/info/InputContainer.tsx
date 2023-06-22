@@ -2,6 +2,7 @@ import { useRef } from "react";
 import {useRecoilState} from "recoil";
 import { BLACK, inputState, InputStateType, playerState, gameState, GameStateType, stageState } from "../../recoil/stage";
 import Button from "../common/Button";
+import { InputContainerStyle as IC } from "./InputContainerStyle";
 import { InputSelectorType } from "./type";
 
 const InputContainer = () => {
@@ -36,12 +37,15 @@ const InputContainer = () => {
     <>
     {
       game === 'ready' &&
-      <form onSubmit={setStartGame}>
-        행: <input type="number" min={5} maxLength={2} ref={inputSelector.row} /> 
-        <br />
-        열: <input type="number" min={5} maxLength={2} ref={inputSelector.cell}/>
-        <Button type="submit">button</Button>
-      </form>
+      <IC.Container onSubmit={setStartGame}>
+        <IC.Label>행</IC.Label>
+        <IC.Input type="number" min={5} max={10} maxLength={2} ref={inputSelector.row} /> 
+        <IC.Label>열</IC.Label>
+        <IC.Input type="number" min={5} max={10} maxLength={2} ref={inputSelector.cell}/>
+        <IC.ButtonContainer>
+          <Button type="submit">button</Button>
+        </IC.ButtonContainer>
+      </IC.Container>
     }
     {
       game === 'start' &&
