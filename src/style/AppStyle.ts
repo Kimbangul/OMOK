@@ -2,13 +2,19 @@ import styled from "styled-components";
 
 export const AppStyle = {
   Container: styled.section`
-    width: 100vw;
-    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
-	  opacity: 0.6; 
+    background-image: linear-gradient(to bottom right,#002f4bA0,#dc4225A0);
+	  /* opacity: 0.6;  */
   `,
+  Inner: styled.div`
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4.8rem;
+  `
 }

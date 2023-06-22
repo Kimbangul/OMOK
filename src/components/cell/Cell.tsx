@@ -11,6 +11,8 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
 
   // FUNCTION 셀 클릭 시 실행
   const onClickCell = () => {
+    if (cellState !== null) return;
+
     const newTable = table?.map((row, rowIdx) => 
       rowIdx === rowNum ? 
         row.map((cell, cellIdx) => cellIdx === cellNum ? player : cell)
@@ -26,9 +28,9 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
   }
 
   return (
-    <C.Container onClick={onClickCell}>
-      {cellState === BLACK ? '⚫' 
-      : cellState === WHITE ? '⚪'
+    <C.Container onClick={onClickCell} state={cellState}>
+      {cellState === BLACK ? <C.Stone>⚫</C.Stone> 
+      : cellState === WHITE ? <C.Stone>⚪</C.Stone>
       : null
       }
     </C.Container>

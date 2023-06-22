@@ -2,7 +2,7 @@ import { useRef } from "react";
 import {useRecoilState} from "recoil";
 import { BLACK, inputState, InputStateType, playerState, gameState, GameStateType, stageState } from "../../recoil/stage";
 import Button from "../common/Button";
-import { InputContainerStyle as IC } from "./InputContainerStyle";
+import { InputContainerStyle as IC, StartInputContainer as SC } from "./InputContainerStyle";
 import { InputSelectorType } from "./type";
 
 const InputContainer = () => {
@@ -49,10 +49,12 @@ const InputContainer = () => {
     }
     {
       game === 'start' &&
-      <div>
-        <div>{input.row} * {input.cell}</div>
-        <div>현재 플레이어 : {player === BLACK ? '⚫' : '⚪'}</div>
-      </div>
+      <SC>
+        <IC.Label>칸 수</IC.Label>
+        <IC.RowInfo>{input.row} * {input.cell}</IC.RowInfo>
+        <IC.Label>현재 플레이어</IC.Label>
+        <IC.RowInfo>{player === BLACK ? '⚫' : '⚪'}</IC.RowInfo>
+      </SC>
     }
     </>
   )

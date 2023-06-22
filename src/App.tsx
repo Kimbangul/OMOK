@@ -5,10 +5,10 @@ import { AppStyle as A } from "./style/AppStyle";
 function App() {
   return (
       <A.Container>
-        <InputContainer />
-        <div>
+        <A.Inner>
+          <InputContainer />
           <Table />
-        </div>
+        </A.Inner>
       </A.Container>
   );
 }

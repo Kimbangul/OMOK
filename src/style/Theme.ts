@@ -33,8 +33,8 @@ export const ButtonStyle = css`
   height: 4.8rem;
   border-radius: 0.8rem;
   cursor: pointer;
-  /* background-image: linear-gradient(to right,#FA7CBB  ,#F14658); */
-  background-image: linear-gradient(to right, #ff101d,#1a78e0);
+  background-image: linear-gradient(to right,#FA7CBBC0  ,#F14658C0);
+  /* background-image: linear-gradient(to right, #ff101d,#1a78e0); */
   /* border-right: 0.1rem solid rgba(255, 255, 255, 0.2); */
   border-top: 0.2rem solid rgba(255, 255, 255, 0.3);
   border-bottom: 0.1rem solid rgba(255, 255, 255, 0.1);

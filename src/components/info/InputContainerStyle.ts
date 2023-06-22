@@ -26,5 +26,13 @@ export const InputContainerStyle = {
     &:first-of-type{
       margin-top: 0;
     }
-  `
+  `,
+  RowInfo: styled.div`
+    font-size: 2.4rem;
+    color: #fff;
+  `,
 }
+
+export const StartInputContainer = styled(InputContainerStyle.Container)`
+  align-self: flex-start;
+`;

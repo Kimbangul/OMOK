@@ -11,7 +11,8 @@ const Table = () => {
     <>
       {
       stage === 'start' &&
-        <T.Container>
+       <T.Wrap>
+         <T.Container>
           <thead></thead>
           <tbody>
           {
@@ -23,6 +24,7 @@ const Table = () => {
           }
           </tbody>
         </T.Container>
+       </T.Wrap>
       }
     </>
   )
