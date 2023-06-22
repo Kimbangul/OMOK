@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from 'styled-components';
+import MetaTag from './components/common/MetaTag';
 import Theme from './style/Theme';
 import GlobalStyle from './style/GlobalStyle';
 import reportWebVitals from './reportWebVitals';
@@ -12,6 +13,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+    <MetaTag />
     <RecoilRoot>
       <ThemeProvider theme={Theme}>
         <GlobalStyle />

@@ -38,14 +38,14 @@ const GlobalStyle = createGlobalStyle`
     border: none;
   }
   body{
-    /* font-family: 'Montserrat', 'Noto Sans KR', sans-serif; */
+    font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
     font-size: 1.4rem;
   }
   h1, h2, h3, h4, h5, h6 {
-    /* font-family: 'Montserrat', 'Noto Sans KR', sans-serif; */
+    font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
   }
   button, input {
-    /* font-family: 'Montserrat', 'Noto Sans KR', sans-serif; */
+    font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
   }
 `;
 
