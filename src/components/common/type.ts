@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
-export interface ButtonPropsType {
+export interface ButtonPropsType extends ButtonHTMLAttributes<'button'> {
   children: ReactNode;
-  type?: "button" | "submit" | "reset" | undefined
+  // type?: "button" | "submit" | "reset" | undefined
 }

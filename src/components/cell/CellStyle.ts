@@ -7,10 +7,12 @@ export const CellStyle = {
     height: 6.4rem;
     min-height: 6.4rem;
     position: relative;
-    border: 0.1rem solid #ffffff35;
+    /* border: 0.1rem solid #ffffff35; */
+    border: transparent;
+    border-radius: 100%;
     cursor: pointer;
     background: transparent;
-    transition: background 0.3s;
+    transition: background 0.3s,;
     text-align: center;
     font-size: 3.2rem;
 
@@ -29,7 +31,7 @@ export const CellStyle = {
     };
 
 
-    /* &::after, &::before{
+    &::after, &::before{
       content: "";
       display: block;
       width: 100%;
@@ -37,13 +39,14 @@ export const CellStyle = {
       position: absolute;
       top: 50%;
       left: 0;
-      background: #222;
+      background: #ffffff45;
       transform: translateY(-50%);
+      z-index: -1;
     }
 
     &::before{
       transform: rotate(90deg) translateY(-50%);
-    } */
+    }
   `,
 
   Stone: styled.span`
