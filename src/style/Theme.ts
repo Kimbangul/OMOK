@@ -24,7 +24,13 @@ export const GlassInputStyle = css`
     width: 100%;
     border: none;
 
-    transition: background 0.3s, color 0.3s;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+
+    &:focus{
+      background: rgba(200, 200, 200, 0.3);
+      box-shadow:rgba(0, 0, 0, 0.05) 0px 0.5rem 0.5rem, rgba(0, 0, 0, 0.05) 0px 0.5rem 0.3rem inset;
+      color: #222;
+    }
 `
 
 export const ButtonStyle = css`

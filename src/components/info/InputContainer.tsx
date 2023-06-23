@@ -4,6 +4,7 @@ import { BLACK, inputState, InputStateType, playerState, gameState, GameStateTyp
 import Button from "../common/Button";
 import { InputContainerStyle as IC, StartInputContainer as SC } from "./InputContainerStyle";
 import { InputSelectorType } from "./type";
+import ResetButton from "../reset/ResetButton";
 
 const InputContainer = () => {
   const inputSelector : InputSelectorType = {
@@ -49,12 +50,14 @@ const InputContainer = () => {
     }
     {
       game === 'start' &&
-      <SC>
+     <>
+       <SC>
         <IC.Label>칸 수</IC.Label>
         <IC.RowInfo>{input.row} * {input.cell}</IC.RowInfo>
         <IC.Label>현재 플레이어</IC.Label>
         <IC.RowInfo>{player === BLACK ? '⚫' : '⚪'}</IC.RowInfo>
       </SC>
+     </>
     }
     </>
   )

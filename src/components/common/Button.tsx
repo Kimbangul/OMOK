@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { ButtonPropsType } from "./type";
 
-const Button = ({children, type}: ButtonPropsType) => {
+const Button = ({children, type, onClick}: ButtonPropsType) => {
   return(
-    <B.Container type={type}>{children}</B.Container>
+    <B.Container type={type} onClick={onClick}>{children}</B.Container>
   )
 }
 

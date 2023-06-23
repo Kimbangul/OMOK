@@ -16,5 +16,8 @@ export const AppStyle = {
     justify-content: center;
     align-items: center;
     gap: 4.8rem;
+  `,
+  Menu: styled.div`
+    align-self: flex-start;
   `
 }

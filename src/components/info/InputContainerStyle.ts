@@ -6,6 +6,7 @@ export const InputContainerStyle = {
     border-radius: 1.6rem;
     background: #ffffff20;
     min-width: 360px;
+    margin-bottom: 2.4rem;
     ${props => props.theme.GlassStyle};
   `,
   Input: styled.input`

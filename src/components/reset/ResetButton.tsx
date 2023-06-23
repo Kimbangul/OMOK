@@ -1,19 +1,31 @@
 import { useRecoilState } from "recoil";
-import { gameState, playerState, stageState } from "../../recoil/stage";
+import { gameState, playerState, stageState, BLACK } from "../../recoil/stage";
 import Button from "../common/Button";
 
 const ResetButton = () => {
   const [game, setGame] = useRecoilState(gameState);
   const [player, setPlayer] = useRecoilState(playerState);
   const [stage, setStage] = useRecoilState(stageState);
-
+  
   // FUNCTION 버튼 클릭 시 실행
-  const onClickButton = () => {
+  const onClickButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log('reset');
+    e.preventDefault();
+
     setGame('ready');
+    setPlayer(BLACK);
+    setStage(null);
+    console.log('reset');
   }
 
   return(
-    <Button type='reset'>RESET</Button>
+   <>
+    {
+      game !== 'ready' ?
+      <Button type='reset' onClick={onClickButton}>RESET</Button>
+      : null
+    }
+   </>
   )
 }
 
