@@ -9,13 +9,11 @@ const ResetButton = () => {
   
   // FUNCTION 버튼 클릭 시 실행
   const onClickButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('reset');
     e.preventDefault();
 
     setGame('ready');
     setPlayer(BLACK);
     setStage(null);
-    console.log('reset');
   }
 
   return(
