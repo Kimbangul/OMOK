@@ -33,21 +33,28 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
     let result;
     
     if (stage === null) return;
-    // console.log(player, rowIdx, cellIdx);
-
     // 가로 체크
-    // console.log(stage[rowIdx]);
-    // console.log(stage[rowIdx].indexOf(player));
     const rowStartIdx = stage[rowIdx].indexOf(player);
 
     for (let i=0; i<5; i++){
       if (cellIdx + i > stage[rowIdx].length) break;
       if (stage[rowIdx][rowStartIdx + i] !== player) break;
       
-      if (i===4) console.log('가로 5');
+      if (i===4) {
+          console.log('가로 5');
+          return;
+        }
     }
 
   // 세로 체크
+  let arr = [];
+  for (let i = 0; i<stage.length; i++){
+    arr.push(stage[i][cellIdx]);
+  }
+  console.log(arr);
+
+  // 대각선 체크
+  
 }
 
   return (
