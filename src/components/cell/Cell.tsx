@@ -25,11 +25,11 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
 
     if (newTable) {
       setStage(newTable)
-      checkTable(player,rowNum, cellNum, newTable);
+      getVictory(player,rowNum, cellNum, newTable);
     }
   }
 
-  const checkTable = (player: number, rowIdx: number, cellIdx: number, stage: RowStateType[]) => {
+  const getVictory = (player: number, rowIdx: number, cellIdx: number, stage: RowStateType[]) => {
     let result;
     
     if (stage === null) return;
@@ -54,7 +54,10 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
   console.log(arr);
 
   // 대각선 체크
-  
+  arr = [];
+  for (let i = 0;  i < cellIdx; i++){
+    arr.unshift(stage[rowIdx-i][cellIdx-i]);
+  }
 }
 
   return (
