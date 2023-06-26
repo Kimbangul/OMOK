@@ -1,19 +1,20 @@
 import { useState } from "react";
 import {useRecoilState} from "recoil";
-import { stageState, playerState, BLACK, WHITE } from "../../recoil/stage";
+import { stageState, playerState, BLACK, WHITE, inputState, RowStateType } from "../../recoil/stage";
 import { CellStyle as C } from "./CellStyle";
 import { CellPropsType } from "./type";
 
 const Cell = ({rowNum, cellNum} : CellPropsType) => {
-  const [table, setTable] = useRecoilState(stageState);
+  const [table, setTable] = useRecoilState(inputState);
   const [player, setPlayer] = useRecoilState(playerState);
+  const [stage, setStage] = useRecoilState(stageState);
   const [cellState, setCellState] = useState<null | number>(null);
 
   // FUNCTION 셀 클릭 시 실행
   const onClickCell = () => {
     if (cellState !== null) return;
 
-    const newTable = table?.map((row, rowIdx) => 
+    const newTable = stage?.map((row, rowIdx) => 
       rowIdx === rowNum ? 
         row.map((cell, cellIdx) => cellIdx === cellNum ? player : cell)
       : row
@@ -23,9 +24,31 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
     setPlayer(player === BLACK ? WHITE : BLACK);
 
     if (newTable) {
-      setTable(newTable)
+      setStage(newTable)
+      checkTable(player,rowNum, cellNum, newTable);
     }
   }
+
+  const checkTable = (player: number, rowIdx: number, cellIdx: number, stage: RowStateType[]) => {
+    let result;
+    
+    if (stage === null) return;
+    // console.log(player, rowIdx, cellIdx);
+
+    // 가로 체크
+    // console.log(stage[rowIdx]);
+    // console.log(stage[rowIdx].indexOf(player));
+    const rowStartIdx = stage[rowIdx].indexOf(player);
+
+    for (let i=0; i<5; i++){
+      if (cellIdx + i > stage[rowIdx].length) break;
+      if (stage[rowIdx][rowStartIdx + i] !== player) break;
+      
+      if (i===4) console.log('가로 5');
+    }
+
+  // 세로 체크
+}
 
   return (
     <C.Container onClick={onClickCell} state={cellState}>

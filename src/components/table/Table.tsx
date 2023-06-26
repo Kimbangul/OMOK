@@ -4,13 +4,13 @@ import Row from "../row/Row";
 import { TableStyle as T } from "./TableStyle";
 
 const Table = () => {
-  const [stage, setStage] = useRecoilState<GameStateType>(gameState);
+  const [game, setGame] = useRecoilState<GameStateType>(gameState);
   const [table, setTable] = useRecoilState<InputStateType>(inputState);
 
   return (
     <>
       {
-      stage === 'start' &&
+      game === 'start' &&
        <T.Wrap>
          <T.Container>
           <thead></thead>
