@@ -53,16 +53,33 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
   }
   // console.log(arr);
 
-  // 대각선 체크 (오른쪽 아래 방향)
+  // 대각선 체크 (오른쪽 방향)
   arr = [];
   for (let i = 0;  i <= cellIdx; i++){
-    if (rowIdx-i < 0 || cellIdx - i < 0) return;
+    if (rowIdx-i < 0 || cellIdx - i < 0) break;
     arr.unshift(stage[rowIdx-i][cellIdx-i]);
   }
   for (let i = 1; i < (stage.length - rowIdx); i++){
+    if (rowIdx + i > stage.length - 1 || cellIdx + i > stage[rowIdx].length - 1) break;
     arr.push(stage[rowIdx+i][cellIdx+i]);
   }
   
+  // console.log(arr);
+
+
+  // 대각선 체크 (왼쪽 방향)
+  arr = [];
+  for (let i = 0;  i <= cellIdx; i++){
+    console.log(rowIdx+i, cellIdx-i)
+    if (rowIdx + i > stage.length - 1 || cellIdx - i < 0) break;
+    arr.unshift(stage[rowIdx+i][cellIdx-i]);
+   
+  }
+  for (let i = 1; i < (stage[rowIdx].length - cellIdx); i++){
+    console.log(rowIdx-i, cellIdx+i)
+    if (rowIdx - i < 0 || cellIdx + i > stage[rowIdx].length - 1) break;
+    arr.push(stage[rowIdx-i][cellIdx+i]);
+  }
   console.log(arr);
 }
 
