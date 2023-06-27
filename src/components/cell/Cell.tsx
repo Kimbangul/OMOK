@@ -51,13 +51,19 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
   for (let i = 0; i<stage.length; i++){
     arr.push(stage[i][cellIdx]);
   }
-  console.log(arr);
+  // console.log(arr);
 
-  // 대각선 체크
+  // 대각선 체크 (오른쪽 아래 방향)
   arr = [];
-  for (let i = 0;  i < cellIdx; i++){
+  for (let i = 0;  i <= cellIdx; i++){
+    if (rowIdx-i < 0 || cellIdx - i < 0) return;
     arr.unshift(stage[rowIdx-i][cellIdx-i]);
   }
+  for (let i = 1; i < (stage.length - rowIdx); i++){
+    arr.push(stage[rowIdx+i][cellIdx+i]);
+  }
+  
+  console.log(arr);
 }
 
   return (
