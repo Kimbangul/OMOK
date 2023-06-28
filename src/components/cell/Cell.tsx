@@ -3,6 +3,7 @@ import {useRecoilState} from "recoil";
 import { stageState, playerState, BLACK, WHITE, inputState, RowStateType } from "../../recoil/stage";
 import { CellStyle as C } from "./CellStyle";
 import { CellPropsType } from "./type";
+import { makeLeftDiagonalArr, makeRightDiagonalArr, makeVerticalArr } from "./getCheck";
 
 const Cell = ({rowNum, cellNum} : CellPropsType) => {
   const [table, setTable] = useRecoilState(inputState);
@@ -25,63 +26,22 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
 
     if (newTable) {
       setStage(newTable)
-      getVictory(player,rowNum, cellNum, newTable);
     }
   }
 
-  const getVictory = (player: number, rowIdx: number, cellIdx: number, stage: RowStateType[]) => {
-    let result;
-    
+  const checkTable = () => {
     if (stage === null) return;
-    // 가로 체크
-    const rowStartIdx = stage[rowIdx].indexOf(player);
 
-    for (let i=0; i<5; i++){
-      if (cellIdx + i > stage[rowIdx].length) break;
-      if (stage[rowIdx][rowStartIdx + i] !== player) break;
-      
-      if (i===4) {
-          console.log('가로 5');
-          return;
-        }
-    }
+    const verticalArr = makeVerticalArr({stage, cellIdx: cellNum});
+    const rightDiagonalArr = makeRightDiagonalArr({stage, cellIdx: cellNum, rowIdx: rowNum});
+    const leftDiagonalArr = makeLeftDiagonalArr({stage, cellIdx: cellNum, rowIdx: rowNum});
 
-  // 세로 체크
-  let arr = [];
-  for (let i = 0; i<stage.length; i++){
-    arr.push(stage[i][cellIdx]);
-  }
-  // console.log(arr);
+    let arr = [stage[rowNum], verticalArr, rightDiagonalArr, leftDiagonalArr];
 
-  // 대각선 체크 (오른쪽 방향)
-  arr = [];
-  for (let i = 0;  i <= cellIdx; i++){
-    if (rowIdx-i < 0 || cellIdx - i < 0) break;
-    arr.unshift(stage[rowIdx-i][cellIdx-i]);
-  }
-  for (let i = 1; i < (stage.length - rowIdx); i++){
-    if (rowIdx + i > stage.length - 1 || cellIdx + i > stage[rowIdx].length - 1) break;
-    arr.push(stage[rowIdx+i][cellIdx+i]);
-  }
-  
-  // console.log(arr);
+    arr.forEach((el, idx) => {
 
-
-  // 대각선 체크 (왼쪽 방향)
-  arr = [];
-  for (let i = 0;  i <= cellIdx; i++){
-    console.log(rowIdx+i, cellIdx-i)
-    if (rowIdx + i > stage.length - 1 || cellIdx - i < 0) break;
-    arr.unshift(stage[rowIdx+i][cellIdx-i]);
-   
+    });
   }
-  for (let i = 1; i < (stage[rowIdx].length - cellIdx); i++){
-    console.log(rowIdx-i, cellIdx+i)
-    if (rowIdx - i < 0 || cellIdx + i > stage[rowIdx].length - 1) break;
-    arr.push(stage[rowIdx-i][cellIdx+i]);
-  }
-  console.log(arr);
-}
 
   return (
     <C.Container onClick={onClickCell} state={cellState}>

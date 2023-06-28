@@ -1,23 +1,22 @@
 import { RowStateType } from "../../recoil/stage";
 import { BaseMakerType, CheckVictoryType, MakerDiagonalType } from "./type";
 
-export const getCheckVictory = ({player, rowIdx, cellIdx, stage} : CheckVictoryType) => {
-  let result; 
+export const getCheckVictory = (goal: number, arr: RowStateType, player: number, cellIdx: number) => {
+  const rowStartIdx = arr.indexOf(player);
 
-  if (stage === null) return;
-
-  const rowStartIdx = stage[rowIdx].indexOf(player);
-
-  for (let i=0; i<5; i++){
-    if (cellIdx + i > stage[rowIdx].length) break;
-    if (stage[rowIdx][rowStartIdx + i] !== player) break;
+  for (let i=0; i<goal; i++){
+    if (cellIdx + i > arr.length) break;
+    if (arr[rowStartIdx + i] !== player) break;
     
-    if (i===4) {
-        console.log('가로 5');
-        return;
+    if (i === (goal - 1)) {
+        console.log(`${player} win`);
+        return true;
       }
   }
+
+  return false;
 }
+
 
 // FUNCTION 세로 배열 만들기
 export const makeVerticalArr = ({stage, cellIdx}: BaseMakerType) => {
