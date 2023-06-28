@@ -11,3 +11,5 @@ export interface BaseMakerType {
 }
 
 export type MakerDiagonalType = BaseMakerType & {rowIdx: number};
+
+export type CheckVictoryType = MakerDiagonalType & {player: number};

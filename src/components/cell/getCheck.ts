@@ -1,10 +1,22 @@
 import { RowStateType } from "../../recoil/stage";
-import { BaseMakerType } from "./type";
+import { BaseMakerType, CheckVictoryType, MakerDiagonalType } from "./type";
 
-export const getCheckVictory = (player: number, rowIdx: number, cellIdx: number, stage: RowStateType[]) => {
+export const getCheckVictory = ({player, rowIdx, cellIdx, stage} : CheckVictoryType) => {
   let result; 
 
-  
+  if (stage === null) return;
+
+  const rowStartIdx = stage[rowIdx].indexOf(player);
+
+  for (let i=0; i<5; i++){
+    if (cellIdx + i > stage[rowIdx].length) break;
+    if (stage[rowIdx][rowStartIdx + i] !== player) break;
+    
+    if (i===4) {
+        console.log('가로 5');
+        return;
+      }
+  }
 }
 
 // FUNCTION 세로 배열 만들기
@@ -19,7 +31,7 @@ export const makeVerticalArr = ({stage, cellIdx}: BaseMakerType) => {
 }
 
 // FUNCTION 오른쪽 아래로 향하는 대각선 배열 만들기
-export const makeRightDiagonalArr = (stage: RowStateType[], cellIdx: number, rowIdx: number) => {
+export const makeRightDiagonalArr = ({stage, cellIdx, rowIdx} : MakerDiagonalType) => {
   let arr = [];
 
   for (let i = 0;  i <= cellIdx; i++){
@@ -36,7 +48,7 @@ export const makeRightDiagonalArr = (stage: RowStateType[], cellIdx: number, row
 }
 
 // FUNCTION 왼쪽 아래로 향하는 대각선 배열 만들기
-export const makeLeftDiagonalArr = (stage: RowStateType[], cellIdx: number, rowIdx: number) => {
+export const makeLeftDiagonalArr = ({stage, cellIdx, rowIdx} : MakerDiagonalType) => {
   let arr = [];
 
   for (let i = 0;  i <= cellIdx; i++){
