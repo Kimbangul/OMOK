@@ -1,5 +1,6 @@
-import { RowStateType } from "../../recoil/stage";
+import { RowStateType, BLACK } from "../../recoil/stage";
 import { BaseMakerType, CheckVictoryType, MakerDiagonalType } from "./type";
+import useReset from "../reset/useReset";
 
 // FUNCTION 승리 판별 함수
 export const getCheckVictory = (goal: number, arr: RowStateType, player: number, cellIdx: number) => {

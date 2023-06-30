@@ -4,12 +4,15 @@ import { stageState, playerState, BLACK, WHITE, inputState, RowStateType } from 
 import { CellStyle as C } from "./CellStyle";
 import { CellPropsType } from "./type";
 import { getCheckVictory, makeLeftDiagonalArr, makeRightDiagonalArr, makeVerticalArr } from "./getCheck";
+import useReset from "../reset/useReset";
 
 const Cell = ({rowNum, cellNum} : CellPropsType) => {
   const [table, setTable] = useRecoilState(inputState);
   const [player, setPlayer] = useRecoilState(playerState);
   const [stage, setStage] = useRecoilState(stageState);
   const [cellState, setCellState] = useState<null | number>(null);
+
+  const reset = useReset();
 
   // FUNCTION 셀 클릭 시 실행
   const onClickCell = () => {
@@ -42,8 +45,10 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
 
     arr.forEach((el, idx) => {
       if (getCheckVictory(5, el, player, cellNum)){
-        console.log(stage);
-        console.log('win');
+        const playerName = player === BLACK ? 'black' : 'white';
+        alert(`${playerName} 님이 승리하였습니다.`);
+      
+        reset.reset();
       }
     });
   }
