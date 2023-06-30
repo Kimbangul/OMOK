@@ -12,4 +12,9 @@ export interface BaseMakerType {
 
 export type MakerDiagonalType = BaseMakerType & {rowIdx: number};
 
-export type CheckVictoryType = MakerDiagonalType & {player: number};
+export interface CheckVictoryType {
+  goal: number;
+  arr: RowStateType[];
+  player: number;
+  cellIdx: number;
+}

@@ -3,7 +3,7 @@ import {useRecoilState} from "recoil";
 import { stageState, playerState, BLACK, WHITE, inputState, RowStateType } from "../../recoil/stage";
 import { CellStyle as C } from "./CellStyle";
 import { CellPropsType } from "./type";
-import { makeLeftDiagonalArr, makeRightDiagonalArr, makeVerticalArr } from "./getCheck";
+import { getCheckVictory, makeLeftDiagonalArr, makeRightDiagonalArr, makeVerticalArr } from "./getCheck";
 
 const Cell = ({rowNum, cellNum} : CellPropsType) => {
   const [table, setTable] = useRecoilState(inputState);
@@ -25,11 +25,12 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
     setPlayer(player === BLACK ? WHITE : BLACK);
 
     if (newTable) {
-      setStage(newTable)
+      setStage(newTable);
+      checkTable(newTable);
     }
   }
 
-  const checkTable = () => {
+  const checkTable = (stage: RowStateType[]) => {
     if (stage === null) return;
 
     const verticalArr = makeVerticalArr({stage, cellIdx: cellNum});
@@ -37,9 +38,13 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
     const leftDiagonalArr = makeLeftDiagonalArr({stage, cellIdx: cellNum, rowIdx: rowNum});
 
     let arr = [stage[rowNum], verticalArr, rightDiagonalArr, leftDiagonalArr];
+    console.log(arr);
 
     arr.forEach((el, idx) => {
-
+      if (getCheckVictory(5, el, player, cellNum)){
+        console.log(stage);
+        console.log('win');
+      }
     });
   }
 

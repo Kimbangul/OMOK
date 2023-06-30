@@ -1,17 +1,14 @@
 import { RowStateType } from "../../recoil/stage";
 import { BaseMakerType, CheckVictoryType, MakerDiagonalType } from "./type";
 
+// FUNCTION 승리 판별 함수
 export const getCheckVictory = (goal: number, arr: RowStateType, player: number, cellIdx: number) => {
-  const rowStartIdx = arr.indexOf(player);
-
-  for (let i=0; i<goal; i++){
-    if (cellIdx + i > arr.length) break;
-    if (arr[rowStartIdx + i] !== player) break;
-    
-    if (i === (goal - 1)) {
-        console.log(`${player} win`);
-        return true;
-      }
+  const toStringArr = arr.join('');
+  const condition = player.toString().repeat(5);
+  
+  if (toStringArr.includes(condition)){
+    console.log(`${player} win`);
+    return true;
   }
 
   return false;
