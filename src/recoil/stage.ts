@@ -1,16 +1,9 @@
-import { useEffect } from "react";
 import {atom} from "recoil";
+import { InputStateType, GameStateType, CellStateType, ScoreStateType, RowStateType, StageStateType } from "./type";
 
 export const BLACK = 0;
 export const WHITE = 1;
 
-// PARAM type
-export interface InputStateType {
-  row: number;
-  cell: number
-}
-
-export type GameStateType = 'ready' | 'start' | 'end';
 
 // PARAM state
 export const inputState = atom<InputStateType>({
@@ -33,11 +26,19 @@ export const playerState = atom<number>({
   default: BLACK
 })
 
-export type CellStateType = number | null;
-export type RowStateType = CellStateType[];
-export type StageStateType = RowStateType[] | null;
+export const scoreState = atom<ScoreStateType>({
+  // 점수 상태
+  key: 'scoreState',
+  default: {
+    0: 0,
+    1: 0,
+  }
+})
 
 export const stageState = atom<StageStateType>({
   key: 'stageState',
   default: null
 })
+
+
+export type { InputStateType, GameStateType, CellStateType, ScoreStateType, RowStateType, StageStateType };
