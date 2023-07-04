@@ -2,6 +2,7 @@ import Table from "./components/table/Table";
 import InputContainer from "./components/info/InputContainer";
 import { AppStyle as A } from "./style/AppStyle";
 import ResetButton from "./components/reset/ResetButton";
+import Score from "./components/score/Score";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
           <A.Menu>
            <InputContainer />
            <ResetButton />
+           <Score />
           </A.Menu>
           <Table />
         </A.Inner>
