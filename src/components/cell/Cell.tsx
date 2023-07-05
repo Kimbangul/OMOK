@@ -1,13 +1,13 @@
 import { useState } from "react";
 import {useRecoilState} from "recoil";
-import { stageState, playerState, BLACK, WHITE, inputState, RowStateType } from "../../recoil/stage";
+import { stageState, playerState, BLACK, WHITE, inputState, RowStateType, scoreState, ScoreStateType } from "../../recoil/stage";
 import { CellStyle as C } from "./CellStyle";
 import { CellPropsType } from "./type";
 import { getCheckVictory, makeLeftDiagonalArr, makeRightDiagonalArr, makeVerticalArr } from "./getCheck";
 import useReset from "../reset/useReset";
 
 const Cell = ({rowNum, cellNum} : CellPropsType) => {
-  const [table, setTable] = useRecoilState(inputState);
+  const [score, setScore] = useRecoilState<ScoreStateType>(scoreState);
   const [player, setPlayer] = useRecoilState(playerState);
   const [stage, setStage] = useRecoilState(stageState);
   const [cellState, setCellState] = useState<null | number>(null);
@@ -43,11 +43,15 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
     let arr = [stage[rowNum], verticalArr, rightDiagonalArr, leftDiagonalArr];
     console.log(arr);
 
-    arr.forEach((el, idx) => {
+    arr.forEach((el ) => {
       if (getCheckVictory(5, el, player, cellNum)){
         const playerName = player === BLACK ? 'black' : 'white';
         alert(`${playerName} 님이 승리하였습니다.`);
-      
+
+        setScore({
+          ...score,
+          [player]: score[player] + 1,
+        });
         reset.reset();
       }
     });

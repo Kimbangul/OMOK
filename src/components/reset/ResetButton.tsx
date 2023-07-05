@@ -1,9 +1,10 @@
 import { useRecoilState } from "recoil";
-import { gameState, playerState, stageState, BLACK } from "../../recoil/stage";
+import { gameState, playerState, stageState, BLACK, scoreState } from "../../recoil/stage";
 import Button from "../common/Button";
 import useReset from "./useReset";
 
 const ResetButton = () => {
+  const [score, setScore] = useRecoilState(scoreState);
   const [game, setGame] = useRecoilState(gameState);
   const [player, setPlayer] = useRecoilState(playerState);
   const [stage, setStage] = useRecoilState(stageState);
@@ -28,3 +29,7 @@ const ResetButton = () => {
 }
 
 export default ResetButton;
+
+function setScore(arg0: any) {
+  throw new Error("Function not implemented.");
+}
