@@ -17,6 +17,28 @@ export const ScoreStyle = {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      width: 90%;
+      margin: 0 auto;
+      margin-top: 2.4rem;
+    `,
+    Item: styled.li`
+      color: #fff;
+      font-size: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      /* &:nth-child(2n+1){
+        &::after{
+          content: ':';
+          display: block;
+        }
+      } */
+    `,
+    Score: styled.span`
+      font-size: 4rem;
+      margin-top: 0.4rem;
     `
   }
 }

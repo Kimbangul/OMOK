@@ -5,14 +5,17 @@ const Score = () => {
     <SS.Container>
       <SS.Title>SCORE</SS.Title>
       <SS.Player.Container>
-        <li>
+        <SS.Player.Item>
           <span>BLACK</span>
-          <span>0</span>
-        </li>
-        <li>
+          <SS.Player.Score>0</SS.Player.Score>
+        </SS.Player.Item>
+        <SS.Player.Item>
+          :
+        </SS.Player.Item>
+        <SS.Player.Item>
           <span>WHITE</span>
-          <span>0</span>
-        </li>
+          <SS.Player.Score>0</SS.Player.Score>
+        </SS.Player.Item>
       </SS.Player.Container>
     </SS.Container>
   )
