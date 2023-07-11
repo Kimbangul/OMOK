@@ -4,11 +4,10 @@ import { BaseMakerType, MakerDiagonalType } from "./type";
 
 // FUNCTION 승리 판별 함수
 export const getCheckVictory = (arr: RowStateType, player: number) => {
-  const toStringArr = arr.join('');
-  const condition = player.toString().repeat(5);
+  const toStringArr = arr.join('|');
+  const condition = (player + '|').toString().repeat(4) + player;
   
   if (toStringArr.includes(condition)){
-    console.log(`${player} win`);
     return true;
   }
 
