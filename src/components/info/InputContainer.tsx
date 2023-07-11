@@ -4,7 +4,6 @@ import { BLACK, inputState, InputStateType, playerState, gameState, GameStateTyp
 import Button from "../common/Button";
 import { InputContainerStyle as IC, StartInputContainer as SC } from "./InputContainerStyle";
 import { InputSelectorType } from "./type";
-import ResetButton from "../reset/ResetButton";
 
 const InputContainer = () => {
   const inputSelector : InputSelectorType = {

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import {useRecoilState} from "recoil";
+import {useRecoilState, useRecoilValue} from "recoil";
 import { stageState, playerState, BLACK, WHITE, inputState, RowStateType, scoreState, ScoreStateType } from "../../recoil/stage";
 import { CellStyle as C } from "./CellStyle";
 import { CellPropsType } from "./type";
-import { getCheckVictory, makeLeftDiagonalArr, makeRightDiagonalArr, makeVerticalArr } from "./getCheck";
+import { getCheckVictory, makeLeftDiagonalArr, makeRightDiagonalArr, makeVerticalArr, getIsFullStage } from "./getCheck";
 import useReset from "../reset/useReset";
 
 const Cell = ({rowNum, cellNum} : CellPropsType) => {
@@ -13,6 +13,7 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
   const [cellState, setCellState] = useState<null | number>(null);
 
   const reset = useReset();
+  const stageLength = useRecoilValue(inputState).row * useRecoilValue(inputState).cell;
 
   // FUNCTION 셀 클릭 시 실행
   const onClickCell = () => {
@@ -43,7 +44,7 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
     let arr = [stage[rowNum], verticalArr, rightDiagonalArr, leftDiagonalArr];
 
     arr.forEach((el ) => {
-      if (getCheckVictory(5, el, player, cellNum)){
+      if (getCheckVictory(el, player)){
         const playerName = player === BLACK ? 'black' : 'white';
         alert(`${playerName} 님이 승리하였습니다.`);
 
@@ -52,8 +53,14 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
           [player]: score[player] + 1,
         });
         reset.reset();
+        return;
       }
     });
+
+    if (getIsFullStage(stage, stageLength)){
+      alert(`돌을 더 놓을 자리가 없습니다. 게임을 리셋합니다.`);
+      reset.reset();
+    }
   }
 
   return (

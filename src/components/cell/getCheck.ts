@@ -1,9 +1,9 @@
-import { RowStateType, BLACK } from "../../recoil/stage";
-import { BaseMakerType, CheckVictoryType, MakerDiagonalType } from "./type";
-import useReset from "../reset/useReset";
+import { RowStateType, BLACK, inputState } from "../../recoil/stage";
+import { useRecoilValue } from "recoil";
+import { BaseMakerType, MakerDiagonalType } from "./type";
 
 // FUNCTION 승리 판별 함수
-export const getCheckVictory = (goal: number, arr: RowStateType, player: number, cellIdx: number) => {
+export const getCheckVictory = (arr: RowStateType, player: number) => {
   const toStringArr = arr.join('');
   const condition = player.toString().repeat(5);
   
@@ -60,3 +60,21 @@ export const makeLeftDiagonalArr = ({stage, cellIdx, rowIdx} : MakerDiagonalType
 
   return arr;
 }
+
+// FUNCTION 오목판이 다 찼는지 확인하기
+export const getIsFullStage = (stage: RowStateType[], stageLength: number) : boolean => {
+  let result : number = 0;
+
+  stage.forEach((el: RowStateType)=> {
+    const emptyCell = el.filter((cell) => cell !== null);
+    result += emptyCell.length;
+
+    return result;
+  });
+  
+  if (result === stageLength){
+    return true;
+  }
+
+  return false;
+};
