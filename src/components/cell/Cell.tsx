@@ -35,13 +35,12 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
 
   const checkTable = (stage: RowStateType[]) => {
     if (stage === null) return;
-
+    // 배열을 만들어 승패 판정
     const verticalArr = makeVerticalArr({stage, cellIdx: cellNum});
     const rightDiagonalArr = makeRightDiagonalArr({stage, cellIdx: cellNum, rowIdx: rowNum});
     const leftDiagonalArr = makeLeftDiagonalArr({stage, cellIdx: cellNum, rowIdx: rowNum});
 
     let arr = [stage[rowNum], verticalArr, rightDiagonalArr, leftDiagonalArr];
-    console.log(arr);
 
     arr.forEach((el ) => {
       if (getCheckVictory(5, el, player, cellNum)){

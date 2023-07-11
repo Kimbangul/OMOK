@@ -10,7 +10,11 @@ const Score = () => {
   return(
     <>
       {
-        game === 'start' &&
+        (
+          game === 'start' || 
+          [score[BLACK], score[WHITE]].some((el) => el > 0)
+        )
+        &&
         <SS.Container>
           <SS.Title>SCORE</SS.Title>
           <SS.Player.Container>

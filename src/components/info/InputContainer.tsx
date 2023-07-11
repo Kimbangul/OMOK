@@ -40,11 +40,11 @@ const InputContainer = () => {
       game === 'ready' &&
       <IC.Container onSubmit={setStartGame}>
         <IC.Label>행</IC.Label>
-        <IC.Input type="number" min={5} max={10} maxLength={2} ref={inputSelector.row} /> 
+        <IC.Input type="number" min={10} max={20} maxLength={2} ref={inputSelector.row} /> 
         <IC.Label>열</IC.Label>
-        <IC.Input type="number" min={5} max={10} maxLength={2} ref={inputSelector.cell}/>
+        <IC.Input type="number" min={10} max={20} maxLength={2} ref={inputSelector.cell}/>
         <IC.ButtonContainer>
-          <Button type="submit">button</Button>
+          <Button type="submit">Start!</Button>
         </IC.ButtonContainer>
       </IC.Container>
     }
