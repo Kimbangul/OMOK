@@ -3,9 +3,16 @@ import InputContainer from "./components/info/InputContainer";
 import { AppStyle as A } from "./style/AppStyle";
 import ResetButton from "./components/reset/ResetButton";
 import Score from "./components/score/Score";
-import socket from 'socket.io';
+import {io} from 'socket.io-client';
 
 function App() {
+ const socket = io("http://127.0.0.1:8000", {
+    reconnectionDelayMax: 10000,
+    withCredentials: true,
+  });
+
+  
+
   return (
       <A.Container>
         <A.Inner>
