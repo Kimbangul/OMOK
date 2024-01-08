@@ -33,13 +33,19 @@ export const GlassInputStyle = css`
     }
 `
 
-export const ButtonStyle = css`
+export const ButtonStyle = css<{color?: string}>`
   padding: 0.8rem 1.6rem;
   width: 100%;
   height: 4.8rem;
   border-radius: 0.8rem;
   cursor: pointer;
-  background-image: linear-gradient(to right,#FA7CBBC0  ,#F14658C0);
+  ${
+    props => props.color ?
+    `background-image: ${props.color};`
+    :
+    `background-image: linear-gradient(to right,#FA7CBBC0  ,#F14658C0);`
+  }
+  //background-image: linear-gradient(to right,#FA7CBBC0  ,#F14658C0);
   /* background-image: linear-gradient(to right, #ff101d,#1a78e0); */
   /* border-right: 0.1rem solid rgba(255, 255, 255, 0.2); */
   border-top: 0.2rem solid rgba(255, 255, 255, 0.3);
