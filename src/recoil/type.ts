@@ -3,7 +3,7 @@ export interface InputStateType {
   cell: number
 }
 
-export type GameStateType = 'ready' | 'start' | 'end';
+export type GameStateType = 'room' | 'ready' | 'start' | 'end';
 
 export interface ScoreStateType{
   [key:number]: number;

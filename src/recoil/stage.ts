@@ -17,7 +17,7 @@ export const inputState = atom<InputStateType>({
 export const gameState = atom<GameStateType>({
   // 게임 시작 상태
   key: 'gameState',
-  default: 'ready',
+  default: 'room',
 });
 
 export const playerState = atom<number>({
@@ -36,6 +36,7 @@ export const scoreState = atom<ScoreStateType>({
 })
 
 export const stageState = atom<StageStateType>({
+  // 오목판 상태
   key: 'stageState',
   default: null
 })

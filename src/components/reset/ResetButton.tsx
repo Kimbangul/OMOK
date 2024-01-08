@@ -17,7 +17,7 @@ const ResetButton = () => {
   return(
    <>
     {
-      game !== 'ready' ?
+      game === ('start' || 'end') ?
       <Button type='reset' onClick={onClickButton}>RESET</Button>
       : null
     }
