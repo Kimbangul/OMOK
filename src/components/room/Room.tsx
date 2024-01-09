@@ -9,8 +9,6 @@ import { RoomStateType } from "./type";
 const Room = () => {
   const [roomState, setRoomState] = useState<RoomStateType>('lobby');
 
-  // FUNCTION 
-
   return(
     <IC.Container>
       {
@@ -23,18 +21,18 @@ const Room = () => {
       {
         roomState === 'make' &&
         <RoomStyle.Inner>
-          <div>{Math.random()*1000}</div>
-          <p>플레이할 사람에게 코드를 알려주세요.</p>
+          <RoomStyle.Code>{Math.random()*1000}</RoomStyle.Code>
+          <RoomStyle.Text>플레이할 사람에게 코드를 알려주세요.</RoomStyle.Text>
           <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={()=>setRoomState('lobby')}>취소하기</Button>
         </RoomStyle.Inner>
       }
       {
         roomState === 'join' &&
         <RoomStyle.Inner>
-          <div>
+           <RoomStyle.Text>플레이할 사람에게 코드를 알려주세요.</RoomStyle.Text>
             <RoomStyle.Input type="text" />
+            <Button onClick={()=>setRoomState('lobby')}>입장하기</Button>
             <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={()=>setRoomState('lobby')}>취소하기</Button>
-          </div>
         </RoomStyle.Inner>
       }
     </IC.Container>
@@ -49,6 +47,18 @@ const RoomStyle ={
   `,
   Input:styled.input`
   ${props => props.theme.GlassInputStyle};
+  `,
+  Code: styled.div`
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #fff;
+    text-align: center;
+    margin-bottom: -1.6rem;
+  `,
+  Text: styled.p`
+    font-size: 1.6rem;
+    color: #fff;
+    text-align: center;
   `
 }
 
