@@ -1,0 +1,1 @@
+export type RoomStateType = 'lobby'|'make'|'join';
