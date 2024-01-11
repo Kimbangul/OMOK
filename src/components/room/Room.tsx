@@ -1,20 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled, {css} from "styled-components";
 import { InputContainerStyle as IC, StartInputContainer as SC } from "../info/InputContainerStyle";
 import Button from "../common/Button";
 import InputContainer from "../info/InputContainer";
 import { RoomStateType } from "./type";
-
+import useApiCall from "../../hooks/useApiCall";
+import axios from "../../axios";
 
 const Room = () => {
   const [roomState, setRoomState] = useState<RoomStateType>('lobby');
+
+  const makeRoom = () => {
+    axios.get(`/room/add`,{params: {player: 'black'}});
+    setRoomState('make');
+  }
 
   return(
     <IC.Container>
       {
         roomState === 'lobby' &&
         <RoomStyle.Inner>
-          <Button onClick={()=>setRoomState('make')}>방 만들기</Button>
+          <Button onClick={makeRoom}>방 만들기</Button>
           <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={()=>setRoomState('join')}>방에 참가하기</Button>
         </RoomStyle.Inner>
       }
