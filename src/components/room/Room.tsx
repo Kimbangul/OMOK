@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { roomState as RecoilRoomState, RoomStateType as RecoilRoomType } from "../../recoil/stage";
 import styled from "styled-components";
@@ -11,13 +11,22 @@ import axios from "../../axios";
 const Room = () => {
   const [roomState, setRoomState] = useState<RoomStateType>('lobby');
   const [roomCode, setRoomCode] = useRecoilState(RecoilRoomState);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const makeRoom = () => {
-    axios.post(`/room/add`,{params: {player: 'black'}}).then((res) => {
+    axios.post(`/room/add`).then((res) => {
       console.log(res.data);
       setRoomCode(res.data.code);
     });
     setRoomState('make');
+  }
+
+  const joinRoom = (e: React.MouseEvent) => {
+    e.preventDefault();
+    axios.post(`/room/join`,{code: inputRef.current?.value}).then((res) => {
+      console.log(inputRef.current?.value);
+      console.log(res);
+    });
   }
 
   return(
@@ -40,9 +49,9 @@ const Room = () => {
       {
         roomState === 'join' &&
         <RoomStyle.Inner>
-           <RoomStyle.Text>플레이할 사람에게 코드를 알려주세요.</RoomStyle.Text>
-            <RoomStyle.Input type="text" />
-            <Button onClick={()=>setRoomState('lobby')}>입장하기</Button>
+           <RoomStyle.Text>입장할 방의 코드를 입력해주세요.</RoomStyle.Text>
+            <RoomStyle.Input type="text" ref={inputRef}/>
+            <Button onClick={joinRoom}>입장하기</Button>
             <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={()=>setRoomState('lobby')}>취소하기</Button>
         </RoomStyle.Inner>
       }
