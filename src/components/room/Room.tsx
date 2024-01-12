@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
-import styled, {css} from "styled-components";
+import { useRecoilState } from "recoil";
+import { roomState as RecoilRoomState, RoomStateType as RecoilRoomType } from "../../recoil/stage";
+import styled from "styled-components";
 import { InputContainerStyle as IC, StartInputContainer as SC } from "../info/InputContainerStyle";
 import Button from "../common/Button";
-import InputContainer from "../info/InputContainer";
 import { RoomStateType } from "./type";
-import useApiCall from "../../hooks/useApiCall";
 import axios from "../../axios";
+
 
 const Room = () => {
   const [roomState, setRoomState] = useState<RoomStateType>('lobby');
+  const [roomCode, setRoomCode] = useRecoilState(RecoilRoomState);
 
   const makeRoom = () => {
-    axios.get(`/room/add`,{params: {player: 'black'}});
+    axios.post(`/room/add`,{params: {player: 'black'}}).then((res) => {
+      console.log(res.data);
+      setRoomCode(res.data.code);
+    });
     setRoomState('make');
   }
 
@@ -27,7 +32,7 @@ const Room = () => {
       {
         roomState === 'make' &&
         <RoomStyle.Inner>
-          <RoomStyle.Code>{Math.random()*1000}</RoomStyle.Code>
+          <RoomStyle.Code>{roomCode || ''}</RoomStyle.Code>
           <RoomStyle.Text>플레이할 사람에게 코드를 알려주세요.</RoomStyle.Text>
           <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={()=>setRoomState('lobby')}>취소하기</Button>
         </RoomStyle.Inner>

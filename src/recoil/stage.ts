@@ -1,5 +1,5 @@
 import {atom} from "recoil";
-import { InputStateType, GameStateType, CellStateType, ScoreStateType, RowStateType, StageStateType } from "./type";
+import { InputStateType, GameStateType, CellStateType, ScoreStateType, RowStateType, StageStateType, RoomStateType } from "./type";
 
 export const BLACK = 0;
 export const WHITE = 1;
@@ -41,5 +41,11 @@ export const stageState = atom<StageStateType>({
   default: null
 })
 
+// 방 상태정보
+export const roomState = atom<RoomStateType>({
+  key: 'roomState',
+  default: null
+})
 
-export type { InputStateType, GameStateType, CellStateType, ScoreStateType, RowStateType, StageStateType };
+
+export type { InputStateType, GameStateType, CellStateType, ScoreStateType, RowStateType, StageStateType, RoomStateType };
