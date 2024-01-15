@@ -6,6 +6,7 @@ import { InputContainerStyle as IC, StartInputContainer as SC } from "../info/In
 import Button from "../common/Button";
 import { RoomStateType } from "./type";
 import axios from "../../axios";
+import socket from "../../socket/socket";
 
 
 const Room = () => {
@@ -29,6 +30,12 @@ const Room = () => {
     });
   }
 
+  const leaveRoom = (e: React.MouseEvent) => {
+    e.preventDefault();
+    socket.leaveRoom(roomCode||'');
+    setRoomState('lobby');
+  }
+
   return(
     <IC.Container>
       {
@@ -43,7 +50,7 @@ const Room = () => {
         <RoomStyle.Inner>
           <RoomStyle.Code>{roomCode || ''}</RoomStyle.Code>
           <RoomStyle.Text>플레이할 사람에게 코드를 알려주세요.</RoomStyle.Text>
-          <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={()=>setRoomState('lobby')}>취소하기</Button>
+          <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={leaveRoom}>취소하기</Button>
         </RoomStyle.Inner>
       }
       {
