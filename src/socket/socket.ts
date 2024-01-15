@@ -1,38 +1,50 @@
-import {io} from 'socket.io-client';
+import {Socket, io} from 'socket.io-client';
 
-// Class Socket(){
-//   constructor(){
-//     this.socket;
-//   }
+class ClientSocket{
+  socket: Socket;
+  constructor(){
+    this.socket = io("http://127.0.0.1:8000", {
+      reconnectionDelayMax: 10000,
+      withCredentials: true,
+    });  
+  }
 
-//   initClientSocket(){
-//     this.socket = io("http://127.0.0.1:8000", {
-//       reconnectionDelayMax: 10000,
-//       withCredentials: true,
-//     });
-  
-//     socket.on("connect", () => {
-//       console.log(socket.id); // x8WIv7-mJelg7on_ALbx
-//     });
-//     socket.on("disconnect", () => {
-//       console.log(socket.id); // undefined
-//     });
-//   }
-// }
+  init(){
+    // this.socket = io("http://127.0.0.1:8000", {
+    //   reconnectionDelayMax: 10000,
+    //   withCredentials: true,
+    // });  
+    this.socket.on("connect", () => {
+      console.log(this.socket.id); // x8WIv7-mJelg7on_ALbx
+    });
+    this.socket.on("disconnect", () => {
+      console.log(this.socket.id); // undefined
+    });
+  }
 
-export default function initClientSocket(){
-  const socket = io("http://127.0.0.1:8000", {
-    reconnectionDelayMax: 10000,
-    withCredentials: true,
-  });
-
-  socket.on("connect", () => {
-    console.log(socket.id); // x8WIv7-mJelg7on_ALbx
-  });
-  socket.on("disconnect", () => {
-    console.log(socket.id); // undefined
-  });
+  // 방 삭제
+  leaveRoom(code: string){
+    this.socket.emit('leaveRoom', code);
+  }
 }
+
+const socket = new ClientSocket();
+
+export default socket;
+
+// export default function initClientSocket(){
+//   const socket = io("http://127.0.0.1:8000", {
+//     reconnectionDelayMax: 10000,
+//     withCredentials: true,
+//   });
+
+//   socket.on("connect", () => {
+//     console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+//   });
+//   socket.on("disconnect", () => {
+//     console.log(socket.id); // undefined
+//   });
+// }
 
    
 // $("#msgForm").on('submit', (e)=>{

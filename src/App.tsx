@@ -4,10 +4,10 @@ import { AppStyle as A } from "./style/AppStyle";
 import ResetButton from "./components/reset/ResetButton";
 import Score from "./components/score/Score";
 import Room from "./components/room/Room";
-import initClientSocket from "./socket/socket";
+import socket from "./socket/socket";
 
 function App() {
-  initClientSocket();
+  socket.init();
 
   return (
       <A.Container>
