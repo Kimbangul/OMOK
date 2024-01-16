@@ -6,6 +6,7 @@ import { InputContainerStyle as IC, StartInputContainer as SC } from "../info/In
 import Button from "../common/Button";
 import { RoomStateType } from "./type";
 import axios from "../../axios";
+import errHandler from "../../axios/errHandler";
 import socket from "../../socket/socket";
 
 
@@ -18,12 +19,7 @@ const Room = () => {
     axios.post(`/room/add`).then((res) => {
       console.log(res.data);
       setRoomCode(res.data.code);
-    }, (e)=>{
-      const data = e.response?.data;
-      if(data.message){
-        alert(data.message);
-      }
-    });
+    }).catch(errHandler);
     setRoomState('make');
   }
 
@@ -31,12 +27,7 @@ const Room = () => {
     e.preventDefault();
     axios.post(`/room/join`,{code: inputRef.current?.value}).then((res) => {
       console.log(inputRef.current?.value);      
-    }, (e)=>{
-      const data = e.response?.data;
-      if(data.message){
-        alert(data.message);
-      }
-    });
+    }).catch(errHandler);
   }
 
   const leaveRoom = (e: React.MouseEvent) => {
