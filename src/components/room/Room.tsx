@@ -19,7 +19,10 @@ const Room = () => {
       console.log(res.data);
       setRoomCode(res.data.code);
     }, (e)=>{
-      console.log(e);
+      const data = e.response?.data;
+      if(data.message){
+        alert(data.message);
+      }
     });
     setRoomState('make');
   }
@@ -27,11 +30,12 @@ const Room = () => {
   const joinRoom = (e: React.MouseEvent) => {
     e.preventDefault();
     axios.post(`/room/join`,{code: inputRef.current?.value}).then((res) => {
-      console.log(inputRef.current?.value);
-      console.log(res);
+      console.log(inputRef.current?.value);      
     }, (e)=>{
-      console.log('join err 1');
-      console.log(e);
+      const data = e.response?.data;
+      if(data.message){
+        alert(data.message);
+      }
     });
   }
 
