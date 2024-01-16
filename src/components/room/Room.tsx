@@ -18,6 +18,8 @@ const Room = () => {
     axios.post(`/room/add`).then((res) => {
       console.log(res.data);
       setRoomCode(res.data.code);
+    }, (e)=>{
+      console.log(e);
     });
     setRoomState('make');
   }
@@ -27,6 +29,9 @@ const Room = () => {
     axios.post(`/room/join`,{code: inputRef.current?.value}).then((res) => {
       console.log(inputRef.current?.value);
       console.log(res);
+    }, (e)=>{
+      console.log('join err 1');
+      console.log(e);
     });
   }
 
