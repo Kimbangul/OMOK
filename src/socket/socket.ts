@@ -22,6 +22,16 @@ class ClientSocket{
     });
   }
 
+  // 방 생성
+  addRoom(){
+    this.socket.emit('addRoom');
+  }
+
+  // 방 입장
+  joinRoom(code:string){
+    this.socket.emit('joinRoom', code);
+  }
+
   // 방 삭제
   leaveRoom(code: string){
     this.socket.emit('leaveRoom', code);
@@ -29,6 +39,17 @@ class ClientSocket{
 }
 
 const socket = new ClientSocket();
+
+// FUNCTION 신규 방 생성
+// socket.socket.on('getNewRoomCode', (code) => {
+//   console.log(`new Room add : ${code}`);
+//  });
+
+ // FUNCTION 서버측에서 메세지 수신
+ socket.socket.on('alertToClient', (msg) => {
+  alert(msg);
+ });
+
 
 export default socket;
 

@@ -15,19 +15,26 @@ const Room = () => {
   const [roomCode, setRoomCode] = useRecoilState(RecoilRoomState);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // FUNCTION 신규 방 생성 시 코드 불러오기
+  socket.socket.on('getNewRoomCode', (code) => {
+    setRoomCode(code);
+  });
+
   const makeRoom = () => {
-    axios.post(`/room/add`).then((res) => {
-      console.log(res.data);
-      setRoomCode(res.data.code);
-    }).catch(errHandler);
+    // axios.post(`/room/add`).then((res) => {
+    //   console.log(res.data);
+    //   setRoomCode(res.data.code);
+    // }).catch((e) => errHandler(e));
+    socket.addRoom();
     setRoomState('make');
   }
 
   const joinRoom = (e: React.MouseEvent) => {
     e.preventDefault();
-    axios.post(`/room/join`,{code: inputRef.current?.value}).then((res) => {
-      console.log(inputRef.current?.value);      
-    }).catch(errHandler);
+    socket.joinRoom(inputRef.current?.value||'');
+    // axios.post(`/room/join`,{code: inputRef.current?.value}).then((res) => {
+    //   console.log(inputRef.current?.value);      
+    // }).catch((e) => errHandler(e));
   }
 
   const leaveRoom = (e: React.MouseEvent) => {
