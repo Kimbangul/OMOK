@@ -2,6 +2,7 @@ import {Socket, io} from 'socket.io-client';
 
 class ClientSocket{
   socket: Socket;
+  id: undefined | string;
   constructor(){
     this.socket = io("http://127.0.0.1:8000", {
       reconnectionDelayMax: 10000,
@@ -16,6 +17,7 @@ class ClientSocket{
     // });  
     this.socket.on("connect", () => {
       console.log(this.socket.id); // x8WIv7-mJelg7on_ALbx
+      this.id = this.socket.id;
     });
     this.socket.on("disconnect", () => {
       console.log(this.socket.id); // undefined
@@ -24,7 +26,7 @@ class ClientSocket{
 
   // 방 생성
   addRoom(){
-    this.socket.emit('addRoom');
+    this.socket.emit('addRoom', this.id);
   }
 
   // 방 입장
@@ -40,10 +42,6 @@ class ClientSocket{
 
 const socket = new ClientSocket();
 
-// FUNCTION 신규 방 생성
-// socket.socket.on('getNewRoomCode', (code) => {
-//   console.log(`new Room add : ${code}`);
-//  });
 
  // FUNCTION 서버측에서 메세지 수신
  socket.socket.on('alertToClient', (msg) => {
