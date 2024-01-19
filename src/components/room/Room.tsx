@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { useRecoilState } from "recoil";
-import { roomState as RecoilRoomState, RoomStateType as RecoilRoomType } from "../../recoil/stage";
+import { GameStateType, roomState as RecoilRoomState, RoomStateType as RecoilRoomType, gameState } from "../../recoil/stage";
 import styled from "styled-components";
 import { InputContainerStyle as IC, StartInputContainer as SC } from "../info/InputContainerStyle";
 import Button from "../common/Button";
@@ -12,6 +12,7 @@ import socket from "../../socket/socket";
 
 const Room = () => {
   const [roomState, setRoomState] = useState<RoomStateType>('lobby');
+  const [game, setGame] = useRecoilState<GameStateType>(gameState);
   const [roomCode, setRoomCode] = useRecoilState(RecoilRoomState);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -20,11 +21,14 @@ const Room = () => {
     setRoomCode(code);
   });
 
+  // FUNCTION 방에 2인 참가 시 게임 매칭
+  socket.socket.on('setMatch', (data) => {
+    console.log('matching');
+    console.log(data);
+    setGame('ready');
+  });
+
   const makeRoom = () => {
-    // axios.post(`/room/add`).then((res) => {
-    //   console.log(res.data);
-    //   setRoomCode(res.data.code);
-    // }).catch((e) => errHandler(e));
     socket.addRoom();
     setRoomState('make');
   }
@@ -32,9 +36,6 @@ const Room = () => {
   const joinRoom = (e: React.MouseEvent) => {
     e.preventDefault();
     socket.joinRoom(inputRef.current?.value||'');
-    // axios.post(`/room/join`,{code: inputRef.current?.value}).then((res) => {
-    //   console.log(inputRef.current?.value);      
-    // }).catch((e) => errHandler(e));
   }
 
   const leaveRoom = (e: React.MouseEvent) => {
@@ -44,32 +45,37 @@ const Room = () => {
   }
 
   return(
-    <IC.Container>
-      {
-        roomState === 'lobby' &&
-        <RoomStyle.Inner>
-          <Button onClick={makeRoom}>방 만들기</Button>
-          <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={()=>setRoomState('join')}>방에 참가하기</Button>
-        </RoomStyle.Inner>
-      }
-      {
-        roomState === 'make' &&
-        <RoomStyle.Inner>
-          <RoomStyle.Code>{roomCode || ''}</RoomStyle.Code>
-          <RoomStyle.Text>플레이할 사람에게 코드를 알려주세요.</RoomStyle.Text>
-          <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={leaveRoom}>취소하기</Button>
-        </RoomStyle.Inner>
-      }
-      {
-        roomState === 'join' &&
-        <RoomStyle.Inner>
-           <RoomStyle.Text>입장할 방의 코드를 입력해주세요.</RoomStyle.Text>
-            <RoomStyle.Input type="text" ref={inputRef}/>
-            <Button onClick={joinRoom}>입장하기</Button>
-            <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={()=>setRoomState('lobby')}>취소하기</Button>
-        </RoomStyle.Inner>
-      }
-    </IC.Container>
+    <>
+   {
+     game === 'room' &&
+      <IC.Container>
+        {
+          roomState === 'lobby' &&
+          <RoomStyle.Inner>
+            <Button onClick={makeRoom}>방 만들기</Button>
+            <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={()=>setRoomState('join')}>방에 참가하기</Button>
+          </RoomStyle.Inner>
+        }
+        {
+          roomState === 'make' &&
+          <RoomStyle.Inner>
+            <RoomStyle.Code>{roomCode || ''}</RoomStyle.Code>
+            <RoomStyle.Text>플레이할 사람에게 코드를 알려주세요.</RoomStyle.Text>
+            <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={leaveRoom}>취소하기</Button>
+          </RoomStyle.Inner>
+        }
+        {
+          roomState === 'join' &&
+          <RoomStyle.Inner>
+            <RoomStyle.Text>입장할 방의 코드를 입력해주세요.</RoomStyle.Text>
+              <RoomStyle.Input type="text" ref={inputRef}/>
+              <Button onClick={joinRoom}>입장하기</Button>
+              <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={()=>setRoomState('lobby')}>취소하기</Button>
+          </RoomStyle.Inner>
+        }
+      </IC.Container>
+    }
+    </>
   )
 }
 

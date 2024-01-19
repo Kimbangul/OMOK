@@ -11,10 +11,6 @@ class ClientSocket{
   }
 
   init(){
-    // this.socket = io("http://127.0.0.1:8000", {
-    //   reconnectionDelayMax: 10000,
-    //   withCredentials: true,
-    // });  
     this.socket.on("connect", () => {
       console.log(this.socket.id); // x8WIv7-mJelg7on_ALbx
       this.id = this.socket.id;
@@ -31,7 +27,7 @@ class ClientSocket{
 
   // 방 입장
   joinRoom(code:string){
-    this.socket.emit('joinRoom', code);
+    this.socket.emit('joinRoom', code, this.id);
   }
 
   // 방 삭제
