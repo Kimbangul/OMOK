@@ -29,6 +29,7 @@ const Room = () => {
     console.log('matching');
     console.log(data);
     setGame('ready');
+    setGameInfo(data);
   });
 
   const makeRoom = () => {
@@ -71,17 +72,11 @@ const Room = () => {
           roomState === 'join' &&
           <RoomStyle.Inner>
             <RoomStyle.Text>입장할 방의 코드를 입력해주세요.</RoomStyle.Text>
-              <RoomStyle.Input type="text" ref={inputRef}/>
+              <RoomStyle.Input type="text" ref={inputRef} maxLength={4}/>
               <Button onClick={joinRoom}>입장하기</Button>
               <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={()=>setRoomState('lobby')}>취소하기</Button>
           </RoomStyle.Inner>
         }
-      </IC.Container>
-    }
-    {
-      (game === 'ready') &&  (gameInfo?.host === socket.id )&&
-      <IC.Container>
-        
       </IC.Container>
     }
     </>
