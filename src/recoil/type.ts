@@ -5,9 +5,19 @@ export interface InputStateType {
 
 export type GameStateType = 'room' | 'ready' | 'start' | 'end';
 
+export interface GameInfoStateType{
+  member: string[];
+  host: string;
+  memberCnt: number;
+  score: {[key:string]: number};
+  gameState: StageStateType;
+}
+
 export interface ScoreStateType{
   [key:number]: number;
 }
+
+
 
 export type RoomStateType = string|null;
 export type CellStateType = number | null;

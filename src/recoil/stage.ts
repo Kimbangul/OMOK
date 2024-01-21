@@ -1,5 +1,5 @@
 import {atom} from "recoil";
-import { InputStateType, GameStateType, CellStateType, ScoreStateType, RowStateType, StageStateType, RoomStateType } from "./type";
+import { InputStateType, GameStateType, GameInfoStateType, CellStateType, ScoreStateType, RowStateType, StageStateType, RoomStateType } from "./type";
 
 export const BLACK = 0;
 export const WHITE = 1;
@@ -18,6 +18,12 @@ export const gameState = atom<GameStateType>({
   // 게임 시작 상태
   key: 'gameState',
   default: 'room',
+});
+
+export const gameInfoState = atom<GameInfoStateType | null>({
+  // 게임 정보 상태(호스트, 멤버, 스코어 등 서버와 연동되는 정보)
+  key: 'gameInfoState',
+  default: null,
 });
 
 export const playerState = atom<number>({
@@ -48,4 +54,4 @@ export const roomState = atom<RoomStateType>({
 })
 
 
-export type { InputStateType, GameStateType, CellStateType, ScoreStateType, RowStateType, StageStateType, RoomStateType };
+export type { InputStateType, GameStateType, CellStateType, GameInfoStateType, ScoreStateType, RowStateType, StageStateType, RoomStateType };
