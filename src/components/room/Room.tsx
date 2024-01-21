@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { useRecoilState } from "recoil";
-import { GameStateType, roomState as RecoilRoomState, RoomStateType as RecoilRoomType, gameState } from "../../recoil/stage";
+import { GameStateType, roomState as RecoilRoomState, RoomStateType as RecoilRoomType, gameInfoState, gameState } from "../../recoil/stage";
 import styled from "styled-components";
 import { InputContainerStyle as IC, StartInputContainer as SC } from "../info/InputContainerStyle";
 import Button from "../common/Button";
@@ -11,10 +11,13 @@ import socket from "../../socket/socket";
 
 
 const Room = () => {
-  const [roomState, setRoomState] = useState<RoomStateType>('lobby');
-  const [game, setGame] = useRecoilState<GameStateType>(gameState);
-  const [roomCode, setRoomCode] = useRecoilState(RecoilRoomState);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [roomState, setRoomState] = useState<RoomStateType>('lobby');
+
+  const [game, setGame] = useRecoilState<GameStateType>(gameState);
+  const [gameInfo, setGameInfo] = useRecoilState(gameInfoState);
+  const [roomCode, setRoomCode] = useRecoilState(RecoilRoomState);
+
 
   // FUNCTION 신규 방 생성 시 코드 불러오기
   socket.socket.on('getNewRoomCode', (code) => {
@@ -73,6 +76,12 @@ const Room = () => {
               <Button color='linear-gradient(to right,#7cb9fac0  ,#7146f1c0)' onClick={()=>setRoomState('lobby')}>취소하기</Button>
           </RoomStyle.Inner>
         }
+      </IC.Container>
+    }
+    {
+      (game === 'ready') &&  (gameInfo?.host === socket.id )&&
+      <IC.Container>
+        
       </IC.Container>
     }
     </>
