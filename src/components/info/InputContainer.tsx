@@ -1,10 +1,10 @@
 import { useRef } from "react";
 import {useRecoilState} from "recoil";
 import { BLACK, inputState, InputStateType, playerState, gameState, GameStateType, stageState, gameInfoState } from "../../recoil/stage";
-import Button from "../common/Button";
-import { InputContainerStyle as IC, StartInputContainer as SC } from "./InputContainerStyle";
+import Button from "components/common/Button";
+import { InputContainerStyle as IC, StartInputContainer as SC } from "components/info/InputContainerStyle";
 import { InputSelectorType } from "./type";
-import socket from "../../socket/socket";
+import socket from "socket/socket";
 
 const InputContainer = () => {
   const inputSelector : InputSelectorType = {

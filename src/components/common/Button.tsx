@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ButtonPropsType } from "./type";
+import { ButtonPropsType } from "components/common/type";
 
 const Button = ({children, type, onClick,color}: ButtonPropsType) => {
   return(

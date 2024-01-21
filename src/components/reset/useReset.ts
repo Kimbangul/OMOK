@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { gameState, playerState, stageState, BLACK } from "../../recoil/stage";
+import { gameState, playerState, stageState, BLACK } from "recoil/stage";
 
 // FUNCTION reset
 const useReset = () => {

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import { stageState, playerState, BLACK, WHITE, inputState, RowStateType, scoreState, ScoreStateType } from "../../recoil/stage";
-import { CellStyle as C } from "./CellStyle";
-import { CellPropsType } from "./type";
+import { CellStyle as C } from "components/cell/CellStyle";
+import { CellPropsType } from "components/cell/type";
 import { getCheckVictory, makeLeftDiagonalArr, makeRightDiagonalArr, makeVerticalArr, getIsFullStage } from "./getCheck";
-import useReset from "../reset/useReset";
+import useReset from "components/reset/useReset";
 
 const Cell = ({rowNum, cellNum} : CellPropsType) => {
   const [score, setScore] = useRecoilState<ScoreStateType>(scoreState);

@@ -1,13 +1,13 @@
 import { useState, useRef } from "react";
+import axios from "axios";
+import errHandler from "axios/errHandler";
+import socket from "socket/socket";
 import { useRecoilState } from "recoil";
 import { GameStateType, roomState as RecoilRoomState, RoomStateType as RecoilRoomType, gameInfoState, gameState } from "../../recoil/stage";
 import styled from "styled-components";
-import { InputContainerStyle as IC, StartInputContainer as SC } from "../info/InputContainerStyle";
-import Button from "../common/Button";
+import { InputContainerStyle as IC, StartInputContainer as SC } from "components/info/InputContainerStyle";
+import Button from "components/common/Button";
 import { RoomStateType } from "./type";
-import axios from "../../axios";
-import errHandler from "../../axios/errHandler";
-import socket from "../../socket/socket";
 
 
 const Room = () => {

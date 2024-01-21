@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import { AxiosResponse } from "axios";
 import { useEffect, useState } from 'react';
 
 type Callable<T> =  (param?: object) => Promise<AxiosResponse<T>>;

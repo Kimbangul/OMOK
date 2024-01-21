@@ -1,5 +1,5 @@
 import {atom} from "recoil";
-import { InputStateType, GameStateType, GameInfoStateType, CellStateType, ScoreStateType, RowStateType, StageStateType, RoomStateType } from "./type";
+import { InputStateType, GameStateType, GameInfoStateType, CellStateType, ScoreStateType, RowStateType, StageStateType, RoomStateType } from "recoil/type";
 
 export const BLACK = 0;
 export const WHITE = 1;

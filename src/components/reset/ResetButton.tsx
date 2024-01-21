@@ -1,7 +1,7 @@
 import { useRecoilState } from "recoil";
-import { gameState, scoreState } from "../../recoil/stage";
-import Button from "../common/Button";
-import useReset from "./useReset";
+import { gameState, scoreState } from "recoil/stage";
+import Button from "components/common/Button";
+import useReset from "components/reset/useReset";
 
 const ResetButton = () => {
   const [game, setGame] = useRecoilState(gameState);

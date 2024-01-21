@@ -1,7 +1,7 @@
 import {useRecoilState} from "recoil";
-import { GameStateType, gameState, inputState, InputStateType } from "../../recoil/stage";
-import Row from "../row/Row";
-import { TableStyle as T } from "./TableStyle";
+import { GameStateType, gameState, inputState, InputStateType } from "recoil/stage";
+import Row from "components/row/Row";
+import { TableStyle as T } from "components/table/TableStyle";
 
 const Table = () => {
   const [game, setGame] = useRecoilState<GameStateType>(gameState);

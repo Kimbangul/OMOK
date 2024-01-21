@@ -1,5 +1,5 @@
-import Cell from "../cell/Cell";
-import { RowPropsType } from "./type";
+import Cell from "components/cell/Cell";
+import { RowPropsType } from "components/row/type";
 
 const Row = ({cell, rowNum} : RowPropsType) => {
   return (

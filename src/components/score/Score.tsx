@@ -1,7 +1,7 @@
-import { ScoreStyle as SS } from "./ScoreStyle";
+import { ScoreStyle as SS } from "components/score/ScoreStyle";
 import { useRecoilValue } from "recoil";
-import { gameState, scoreState, BLACK, WHITE } from "../../recoil/stage";
-import { GameStateType, ScoreStateType } from "../../recoil/stage";
+import { gameState, scoreState, BLACK, WHITE } from "recoil/stage";
+import { GameStateType, ScoreStateType } from "recoil/stage";
 
 const Score = () => {
   const game = useRecoilValue<GameStateType>(gameState);
