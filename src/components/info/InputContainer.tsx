@@ -5,6 +5,7 @@ import Button from "components/common/Button";
 import { InputContainerStyle as IC, StartInputContainer as SC } from "components/info/InputContainerStyle";
 import { InputSelectorType } from "./type";
 import socket from "socket/socket";
+import { StartGameParamsType } from "socket/type";
 
 const InputContainer = () => {
   const inputSelector : InputSelectorType = {
@@ -32,17 +33,21 @@ const InputContainer = () => {
 
     setInput(inputState);
 
-    const member = gameInfo?.member || [];
-    const code = gameInfo?.code || '';
-    const gameInfo = {
+    const info : StartGameParamsType = {
       member: gameInfo?.member || [],
       code: gameInfo?.code || '',
       input: inputState,
     }
-    socket.startGame(code, member);
-    //setGame('start');
-    //setTable(Array(rowNum).fill(Array(cellNum).fill(null)));
+    setTable(Array(rowNum).fill(Array(cellNum).fill(null)));
+    console.log(info);
+    socket.startGame(info);   
   }
+
+  // FUNCTION 서버에 행,열 설정이 정상적으로 넘겨졌을 때
+  socket.socket.on('doneStartGame', (data) => {
+    console.log(data);
+    setGame('start');   
+  });
 
   return(
     <>

@@ -1,4 +1,5 @@
 import {Socket, io} from 'socket.io-client';
+import { StartGameParamsType } from 'socket/type';
 
 class ClientSocket{
   socket: Socket;
@@ -36,8 +37,8 @@ class ClientSocket{
   }
 
   // 게임 시작
-  startGame(code: string, member: string[]){
-    this.socket.emit('startGame', code, member);
+  startGame(info: StartGameParamsType){
+    this.socket.emit('startGame', info);
   }
 }
 
