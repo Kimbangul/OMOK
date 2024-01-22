@@ -22,17 +22,26 @@ const InputContainer = () => {
   // FUNCTION 시작 및 input정보 바인딩
   const setStartGame = (e: React.FormEvent) => {
     e.preventDefault();
+    
     const rowNum = Number(inputSelector.row.current?.value) || 10;
     const cellNum = Number(inputSelector.cell.current?.value) || 10;
+    const inputState = {...input, 
+      row: rowNum, 
+      cell: cellNum, 
+    };
 
-    setInput(
-      {...input, 
-       row: rowNum, 
-       cell: cellNum, 
-     }
-    );
-    setGame('start');
-    setTable(Array(rowNum).fill(Array(cellNum).fill(null)));
+    setInput(inputState);
+
+    const member = gameInfo?.member || [];
+    const code = gameInfo?.code || '';
+    const gameInfo = {
+      member: gameInfo?.member || [],
+      code: gameInfo?.code || '',
+      input: inputState,
+    }
+    socket.startGame(code, member);
+    //setGame('start');
+    //setTable(Array(rowNum).fill(Array(cellNum).fill(null)));
   }
 
   return(

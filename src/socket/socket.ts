@@ -34,6 +34,11 @@ class ClientSocket{
   leaveRoom(code: string){
     this.socket.emit('leaveRoom', code);
   }
+
+  // 게임 시작
+  startGame(code: string, member: string[]){
+    this.socket.emit('startGame', code, member);
+  }
 }
 
 const socket = new ClientSocket();

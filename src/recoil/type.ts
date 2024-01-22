@@ -6,11 +6,13 @@ export interface InputStateType {
 export type GameStateType = 'room' | 'ready' | 'start' | 'end';
 
 export interface GameInfoStateType{
+  code: string;
   member: string[];
   host: string;
   memberCnt: number;
   score: {[key:string]: number};
   gameState: StageStateType;
+  stageSize: {row: number, cell: number}
 }
 
 export interface ScoreStateType{
