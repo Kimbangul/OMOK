@@ -1,5 +1,6 @@
-import {atom} from "recoil";
+import {atom, selector} from "recoil";
 import { InputStateType, GameStateType, GameInfoStateType, CellStateType, ScoreStateType, RowStateType, StageStateType, RoomStateType } from "recoil/type";
+import socket from "socket/socket";
 
 export const BLACK = 0;
 export const WHITE = 1;
@@ -24,6 +25,16 @@ export const gameInfoState = atom<GameInfoStateType | null>({
   // 게임 정보 상태(호스트, 멤버, 스코어 등 서버와 연동되는 정보)
   key: 'gameInfoState',
   default: null,
+});
+
+export const playableState = selector({
+  // 현재 턴이 자신의 턴인지 판별하는 데 사용
+  key: 'playableState',
+  get: ({ get }) => {
+    if (!socket.id) return -1;
+    const turn = get(gameInfoState)?.member.indexOf(socket.id); 
+    return turn;
+  }
 });
 
 export const playerState = atom<number>({

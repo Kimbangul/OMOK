@@ -1,19 +1,26 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
-import { stageState, playerState, BLACK, WHITE, inputState, RowStateType, scoreState, ScoreStateType } from "../../recoil/stage";
+import { stageState, playerState, BLACK, WHITE, inputState, RowStateType, scoreState, ScoreStateType, gameInfoState, playableState } from "../../recoil/stage";
 import { CellStyle as C } from "components/cell/CellStyle";
 import { CellPropsType } from "components/cell/type";
 import { getCheckVictory, makeLeftDiagonalArr, makeRightDiagonalArr, makeVerticalArr, getIsFullStage } from "./getCheck";
 import useReset from "components/reset/useReset";
+import socket from "socket/socket";
 
 const Cell = ({rowNum, cellNum} : CellPropsType) => {
   const [score, setScore] = useRecoilState<ScoreStateType>(scoreState);
   const [player, setPlayer] = useRecoilState(playerState);
   const [stage, setStage] = useRecoilState(stageState);
+  const [gameInfo, setGameInfo] = useRecoilState(gameInfoState);
   const [cellState, setCellState] = useState<null | number>(null);
+  const myTurn = useRecoilValue(playableState);
 
   const reset = useReset();
   const stageLength = useRecoilValue(inputState).row * useRecoilValue(inputState).cell;
+  
+  console.log(myTurn);
+
+  
 
   // FUNCTION 셀 클릭 시 실행
   const onClickCell = () => {
