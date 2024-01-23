@@ -27,9 +27,15 @@ export const gameInfoState = atom<GameInfoStateType | null>({
   default: null,
 });
 
-export const playableState = selector({
-  // 현재 턴이 자신의 턴인지 판별하는 데 사용
-  key: 'playableState',
+export const playerState = atom<number>({
+  // 현재 플레이어 상태
+  key: 'playerState',
+  default: BLACK
+})
+
+export const playerTurnState = selector({
+  // 자신의 턴 계산
+  key: 'playerTurnState',
   get: ({ get }) => {
     if (!socket.id) return -1;
     const turn = get(gameInfoState)?.member.indexOf(socket.id); 
@@ -37,11 +43,13 @@ export const playableState = selector({
   }
 });
 
-export const playerState = atom<number>({
-  // 현재 플레이어 상태
-  key: 'playerState',
-  default: BLACK
-})
+export const playableState = selector({
+  // 현재 턴이 자신의 턴인지 판별하는 데 사용
+  key: 'playableState',
+  get: ({ get }) => {
+    return  get(playerTurnState) ===  get(playerState);
+  }
+});
 
 export const scoreState = atom<ScoreStateType>({
   // 점수 상태

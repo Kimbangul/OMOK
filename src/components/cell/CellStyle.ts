@@ -1,7 +1,7 @@
 import styled, {css} from "styled-components"
 
 export const CellStyle = {
-  Container: styled.td<{state: null | number}>`
+  Container: styled.td<{state: null | number, isMyTurn: boolean}>`
     width: 6.4rem;
     min-width: 6.4rem;
     height: 6.4rem;
@@ -9,16 +9,21 @@ export const CellStyle = {
     position: relative;
     /* border: 0.1rem solid #ffffff35; */
     border: transparent;
-    border-radius: 100%;
-    cursor: pointer;
+    border-radius: 100%;    
     background: transparent;
     transition: background 0.3s,;
     text-align: center;
     font-size: 3.2rem;
 
-    &:hover{
-      background-image: linear-gradient(to bottom,#ffffff40  ,#ffffff10);
+    ${ props => props.isMyTurn === true &&
+    css`
+      cursor: pointer;
+       &:hover{
+            background-image: linear-gradient(to bottom,#ffffff40  ,#ffffff10);
+        }
+    `
     }
+
 
     ${props => typeof props.state === 'number' && 
       css`

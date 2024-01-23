@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
-import { stageState, playerState, BLACK, WHITE, inputState, RowStateType, scoreState, ScoreStateType, gameInfoState, playableState } from "../../recoil/stage";
+import { stageState, playerState, BLACK, WHITE, inputState, RowStateType, scoreState, ScoreStateType, gameInfoState, playerTurnState, playableState } from "../../recoil/stage";
 import { CellStyle as C } from "components/cell/CellStyle";
 import { CellPropsType } from "components/cell/type";
 import { getCheckVictory, makeLeftDiagonalArr, makeRightDiagonalArr, makeVerticalArr, getIsFullStage } from "./getCheck";
@@ -13,17 +13,19 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
   const [stage, setStage] = useRecoilState(stageState);
   const [gameInfo, setGameInfo] = useRecoilState(gameInfoState);
   const [cellState, setCellState] = useState<null | number>(null);
-  const myTurn = useRecoilValue(playableState);
+  const myTurn = useRecoilValue(playerTurnState);
+  const isMyTurn = useRecoilValue(playableState);
 
   const reset = useReset();
   const stageLength = useRecoilValue(inputState).row * useRecoilValue(inputState).cell;
-  
-  console.log(myTurn);
 
-  
+  useEffect(()=>{
+    console.log(isMyTurn);
+  }, [isMyTurn]);
 
   // FUNCTION 셀 클릭 시 실행
   const onClickCell = () => {
+    if (!isMyTurn) return;
     if (cellState !== null) return;
 
     const newTable = stage?.map((row, rowIdx) => 
@@ -71,7 +73,7 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
   }
 
   return (
-    <C.Container onClick={onClickCell} state={cellState}>
+    <C.Container onClick={onClickCell} state={cellState} isMyTurn={isMyTurn}>
       {cellState === BLACK ? <C.Stone>⚫</C.Stone> 
       : cellState === WHITE ? <C.Stone>⚪</C.Stone>
       : null
