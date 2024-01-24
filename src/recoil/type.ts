@@ -8,6 +8,7 @@ export type GameStateType = 'room' | 'ready' | 'start' | 'end';
 export interface GameInfoStateType{
   code: string;
   member: string[];
+  turn: number;
   host: string;
   memberCnt: number;
   score: ScoreStateType;

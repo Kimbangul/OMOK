@@ -40,6 +40,7 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
     console.log(gameInfo);
     socket.update(gameInfo?.code || '', {
       ...gameInfo,
+      turn: player === BLACK ? WHITE : BLACK,
       gameState: newTable,
       score: score
     });
@@ -76,10 +77,16 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
 
   return (
     <C.Container onClick={onClickCell} state={cellState} isMyTurn={isMyTurn}>
-      {cellState === BLACK ? <C.Stone>⚫</C.Stone> 
-      : cellState === WHITE ? <C.Stone>⚪</C.Stone>
-      : null
-      }
+     {
+       stage === null ? null :
+      <>
+        {
+          stage[rowNum][cellNum] === BLACK ? <C.Stone>⚫</C.Stone> 
+          : stage[rowNum][cellNum] === WHITE ? <C.Stone>⚪</C.Stone>
+          : null
+        }
+      </>
+     }
     </C.Container>
   )
 }

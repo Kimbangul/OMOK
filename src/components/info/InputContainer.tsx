@@ -46,6 +46,7 @@ const InputContainer = () => {
   // FUNCTION 서버에 행,열 설정이 정상적으로 넘겨졌을 때
   socket.socket.on('doneStartGame', (data) => {
     console.log(data);
+    setGameInfo(data);
     setGame('start');   
   });
 
