@@ -10,7 +10,7 @@ export interface GameInfoStateType{
   member: string[];
   host: string;
   memberCnt: number;
-  score: {[key:string]: number};
+  score: ScoreStateType;
   gameState: StageStateType;
   stageSize: {row: number, cell: number}
 }

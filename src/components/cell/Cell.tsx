@@ -19,10 +19,6 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
   const reset = useReset();
   const stageLength = useRecoilValue(inputState).row * useRecoilValue(inputState).cell;
 
-  useEffect(()=>{
-    console.log(isMyTurn);
-  }, [isMyTurn]);
-
   // FUNCTION 셀 클릭 시 실행
   const onClickCell = () => {
     if (!isMyTurn) return;
@@ -41,6 +37,12 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
       setStage(newTable);
       checkTable(newTable);
     }
+    console.log(gameInfo);
+    socket.update(gameInfo?.code || '', {
+      ...gameInfo,
+      gameState: newTable,
+      score: score
+    });
   }
 
   const checkTable = (stage: RowStateType[]) => {

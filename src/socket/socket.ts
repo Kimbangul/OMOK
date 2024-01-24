@@ -1,3 +1,4 @@
+import { GameInfoStateType } from 'recoil/type';
 import {Socket, io} from 'socket.io-client';
 import { StartGameParamsType } from 'socket/type';
 
@@ -39,6 +40,11 @@ class ClientSocket{
   // 게임 시작
   startGame(info: StartGameParamsType){
     this.socket.emit('startGame', info);
+  }
+
+  // 진행상황 업데이트
+  update(code:string, info: Partial<GameInfoStateType>){
+    this.socket.emit('updateServer', code, info);
   }
 }
 
