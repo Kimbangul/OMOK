@@ -1,4 +1,5 @@
-import { GameInfoStateType } from 'recoil/type';
+import { BLACK } from 'recoil/stage';
+import { GameInfoStateType, ScoreStateType } from 'recoil/type';
 import {Socket, io} from 'socket.io-client';
 import { StartGameParamsType } from 'socket/type';
 
@@ -42,10 +43,27 @@ class ClientSocket{
     this.socket.emit('startGame', info);
   }
 
+   // 게임 종료
+   endGame(member: string[], msg: string){
+    this.socket.emit('endGame', msg);
+   }
+
   // 진행상황 업데이트
   update(code:string, info: Partial<GameInfoStateType>){
     this.socket.emit('updateServer', code, info);
   }
+
+  // 게임 리셋
+  reset(code: string, score: ScoreStateType){
+    const info = {
+      gameState: null,
+      turn: BLACK,
+      score: score
+    }
+    this.socket.emit('updateServer', code, info);
+  }
+
+ 
 }
 
 const socket = new ClientSocket();

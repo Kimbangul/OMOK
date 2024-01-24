@@ -20,8 +20,6 @@ export interface ScoreStateType{
   [key:number]: number;
 }
 
-
-
 export type RoomStateType = string|null;
 export type CellStateType = number | null;
 export type RowStateType = CellStateType[];

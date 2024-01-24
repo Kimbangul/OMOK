@@ -55,23 +55,28 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
 
     let arr = [stage[rowNum], verticalArr, rightDiagonalArr, leftDiagonalArr];
 
-    arr.forEach((el ) => {
+    arr.forEach((el) => {
       if (getCheckVictory(el, player)){
         const playerName = player === BLACK ? 'black' : 'white';
-        alert(`${playerName} 님이 승리하였습니다.`);
+        const msg = `${playerName} 님이 승리하였습니다.`;
+        const newScore = { ...score,
+          [player]: score[player] + 1};
 
-        setScore({
-          ...score,
-          [player]: score[player] + 1,
-        });
+        setScore(newScore);
         reset.reset();
+
+        socket.reset(gameInfo?.code || '', newScore);
+        socket.endGame(gameInfo?.member||[], msg);
         return;
       }
     });
 
     if (getIsFullStage(stage, stageLength)){
-      alert(`돌을 더 놓을 자리가 없습니다. 게임을 리셋합니다.`);
+      const msg = `돌을 더 놓을 자리가 없습니다. 게임을 리셋합니다.`;
+      socket.endGame(gameInfo?.member||[], msg);
       reset.reset();
+      socket.reset(gameInfo?.code || '', score);
+      
     }
   }
 
