@@ -86,8 +86,12 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
        stage === null ? null :
       <>
         {
-          stage[rowNum][cellNum] === BLACK ? <C.Stone>⚫</C.Stone> 
-          : stage[rowNum][cellNum] === WHITE ? <C.Stone>⚪</C.Stone>
+          // TODO 임시 추가
+          // stage[rowNum][cellNum] === BLACK ? <C.Stone>⚫</C.Stone> 
+          // : stage[rowNum][cellNum] === WHITE ? <C.Stone>⚪</C.Stone>
+          // : null
+          stage[rowNum][cellNum] === BLACK ? <C.Stone>ㅁ</C.Stone> 
+          : stage[rowNum][cellNum] === WHITE ? <C.Stone>ㅇ</C.Stone>
           : null
         }
       </>

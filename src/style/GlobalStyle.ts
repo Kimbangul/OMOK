@@ -4,6 +4,8 @@ const GlobalStyle = createGlobalStyle`
  html{
   font-size: 62.5%; 
   transition: font-size 0.3s;
+  // TODO 임시 추가
+  filter: grayscale(1);
 
   @media(max-width: 768px){
     font-size: 58%;
