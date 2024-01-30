@@ -65,7 +65,7 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
         setScore(newScore);
         reset.reset();
 
-        socket.reset(gameInfo?.code || '', newScore);
+        socket.reset(gameInfo?.code || '', newScore, gameInfo || {});
         socket.endGame(gameInfo?.member||[], msg);
         return;
       }
@@ -75,7 +75,7 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
       const msg = `돌을 더 놓을 자리가 없습니다. 게임을 리셋합니다.`;
       socket.endGame(gameInfo?.member||[], msg);
       reset.reset();
-      socket.reset(gameInfo?.code || '', score);
+      socket.reset(gameInfo?.code || '', score, gameInfo || {});
       
     }
   }
