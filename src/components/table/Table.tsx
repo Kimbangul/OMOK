@@ -4,6 +4,7 @@ import Row from "components/row/Row";
 import { TableStyle as T } from "components/table/TableStyle";
 import socket from "socket/socket";
 import { useEffect } from "react";
+import useReset from "components/reset/useReset";
 
 const Table = () => {
   const [game, setGame] = useRecoilState<GameStateType>(gameState);
@@ -11,6 +12,7 @@ const Table = () => {
   const [player, setPlayer] = useRecoilState(playerState);
   const [gameStage, setGameStage] = useRecoilState(stageState);
   const [gameInfo, setGameInfo] = useRecoilState(gameInfoState);
+  const reset = useReset();
 
     useEffect(()=>{
       // FUNCTION 클라이언트 데이터 업데이트
@@ -21,6 +23,10 @@ const Table = () => {
         setGameStage(data.gameState);
         setPlayer(data.turn);   
       });
+
+      socket.socket.on('resetClient', ()=>{
+        reset.reset();
+      })
     }, [socket]);
 
   return (

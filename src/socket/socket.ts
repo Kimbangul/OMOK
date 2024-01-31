@@ -44,8 +44,8 @@ class ClientSocket{
   }
 
    // 게임 종료
-   endGame(member: string[], msg: string){
-    this.socket.emit('endGame', member, msg);
+   endGame(code: string, member: string[], msg: string){
+    this.socket.emit('endGame', code, member, msg);
    }
 
   // 진행상황 업데이트

@@ -63,20 +63,16 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
           [player]: score[player] + 1};
 
         setScore(newScore);
-        reset.reset();
-
         socket.reset(gameInfo?.code || '', newScore, gameInfo || {});
-        socket.endGame(gameInfo?.member||[], msg);
+        socket.endGame(gameInfo?.code||'', gameInfo?.member||[], msg);
         return;
       }
     });
 
     if (getIsFullStage(stage, stageLength)){
       const msg = `돌을 더 놓을 자리가 없습니다. 게임을 리셋합니다.`;
-      socket.endGame(gameInfo?.member||[], msg);
-      reset.reset();
-      socket.reset(gameInfo?.code || '', score, gameInfo || {});
-      
+      socket.reset(gameInfo?.code || '', score, gameInfo || {});      
+      socket.endGame(gameInfo?.code||'', gameInfo?.member||[], msg); 
     }
   }
 

@@ -9,8 +9,8 @@ const useReset = () => {
 
   const reset = () => {
     setGame('ready');
-    setPlayer(BLACK);
-    setStage(null);
+    // setStage(null);
+    // setPlayer(BLACK);
   }
 
   return {
