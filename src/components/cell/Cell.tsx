@@ -34,18 +34,18 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
     setCellState(player);
     setPlayer(player === BLACK ? WHITE : BLACK);
 
+    console.log('onClickCell update')
+
     if (newTable) {
       setStage(newTable);
+      socket.update(gameInfo?.code || '', {
+        ...gameInfo,
+        turn: player === BLACK ? WHITE : BLACK,
+        stageState: newTable,
+      });
       checkTable(newTable);
     }
-    console.log(gameInfo);
-    console.log('onClickCell update')
-    socket.update(gameInfo?.code || '', {
-      ...gameInfo,
-      turn: player === BLACK ? WHITE : BLACK,
-      stageState: newTable,
-      score: score
-    });
+    console.log(gameInfo);    
   }
 
   const checkTable = (stage: RowStateType[]) => {
