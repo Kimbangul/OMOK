@@ -5,11 +5,13 @@ import ResetButton from "components/reset/ResetButton";
 import Score from "components/score/Score";
 import Room from "components/room/Room";
 import socket from "socket/socket";
+import SocketWrapper from "components/socket/SocketWrapper";
 
 function App() {
   socket.init();
 
   return (
+    <SocketWrapper>
       <A.Container>
         <A.Inner>          
           <A.Menu>
@@ -21,6 +23,7 @@ function App() {
           <Table />
         </A.Inner>
       </A.Container>
+    </SocketWrapper>
   );
 }
 

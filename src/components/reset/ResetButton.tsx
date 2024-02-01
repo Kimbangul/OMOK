@@ -13,8 +13,8 @@ const ResetButton = () => {
   const onClickButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const score = gameInfo?.score || {};
-    socket.reset(gameInfo?.code || '', score, gameInfo || {});
-    reset.reset();
+    socket.reset(gameInfo?.code || '');
+    //reset.reset();
   }
 
   return(

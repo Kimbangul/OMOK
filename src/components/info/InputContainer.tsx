@@ -33,22 +33,17 @@ const InputContainer = () => {
 
     setInput(inputState);
 
+    const code = gameInfo?.code || '';
     const info : StartGameParamsType = {
       member: gameInfo?.member || [],
-      code: gameInfo?.code || '',
+      code:code,
       input: inputState,
+      stageState: Array(rowNum).fill(Array(cellNum).fill(null)),
+      gameState: 'start'
     }
-    setTable(Array(rowNum).fill(Array(cellNum).fill(null)));
     console.log(info);
-    socket.startGame(info);   
+    socket.update(code, info) 
   }
-
-  // FUNCTION 서버에 행,열 설정이 정상적으로 넘겨졌을 때
-  socket.socket.on('doneStartGame', (data) => {
-    console.log(data);
-    setGameInfo(data);
-    setGame('start');   
-  });
 
   return(
     <>

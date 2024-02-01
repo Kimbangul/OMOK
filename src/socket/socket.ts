@@ -54,26 +54,20 @@ class ClientSocket{
   }
 
   // 게임 리셋
-  reset(code: string, score: ScoreStateType, info: Partial<GameInfoStateType>){
-    const newInfo = {
-      ...info,
-      gameState: null,
-      turn: BLACK,
-      score: score
-    }
-    this.socket.emit('updateServer', code, newInfo);
+  reset(code: string, score?: ScoreStateType){
+    // const newInfo = {
+    //   ...info,
+    //   gameState: null,
+    //   turn: BLACK
+    // }
+    // this.socket.emit('updateServer', code, newInfo);
+    const newScore = score || {};
+    this.socket.emit('resetRoom', code, newScore);
   }
-
- 
 }
 
 const socket = new ClientSocket();
 
-
- // FUNCTION 서버측에서 메세지 수신
- socket.socket.on('alertToClient', (msg) => {
-  alert(msg);
- });
 
 
 export default socket;

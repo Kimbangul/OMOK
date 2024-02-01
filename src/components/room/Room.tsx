@@ -18,20 +18,6 @@ const Room = () => {
   const [gameInfo, setGameInfo] = useRecoilState(gameInfoState);
   const [roomCode, setRoomCode] = useRecoilState(RecoilRoomState);
 
-
-  // FUNCTION 신규 방 생성 시 코드 불러오기
-  socket.socket.on('getNewRoomCode', (code) => {
-    setRoomCode(code);
-  });
-
-  // FUNCTION 방에 2인 참가 시 게임 매칭
-  socket.socket.on('setMatch', (data) => {
-    console.log('matching');
-    console.log(data);
-    setGame('ready');
-    setGameInfo(data);
-  });
-
   const makeRoom = () => {
     socket.addRoom();
     setRoomState('make');

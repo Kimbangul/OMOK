@@ -13,7 +13,6 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
   const [stage, setStage] = useRecoilState(stageState);
   const [gameInfo, setGameInfo] = useRecoilState(gameInfoState);
   const [cellState, setCellState] = useState<null | number>(null);
-  const myTurn = useRecoilValue(playerTurnState);
   const isMyTurn = useRecoilValue(playableState);
 
   const reset = useReset();
@@ -41,7 +40,7 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
     socket.update(gameInfo?.code || '', {
       ...gameInfo,
       turn: player === BLACK ? WHITE : BLACK,
-      gameState: newTable,
+      stageState: newTable,
       score: score
     });
   }
@@ -63,7 +62,7 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
           [player]: score[player] + 1};
 
         setScore(newScore);
-        socket.reset(gameInfo?.code || '', newScore, gameInfo || {});
+        socket.update(gameInfo?.code || '', {score: newScore});
         socket.endGame(gameInfo?.code||'', gameInfo?.member||[], msg);
         return;
       }
@@ -71,10 +70,11 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
 
     if (getIsFullStage(stage, stageLength)){
       const msg = `돌을 더 놓을 자리가 없습니다. 게임을 리셋합니다.`;
-      socket.reset(gameInfo?.code || '', score, gameInfo || {});      
+      socket.reset(gameInfo?.code || '');      
       socket.endGame(gameInfo?.code||'', gameInfo?.member||[], msg); 
     }
   }
+
 
   return (
     <C.Container onClick={onClickCell} state={cellState} isMyTurn={isMyTurn}>
