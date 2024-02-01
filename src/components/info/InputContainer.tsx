@@ -42,7 +42,8 @@ const InputContainer = () => {
       gameState: 'start'
     }
     console.log(info);
-    socket.update(code, info) 
+    socket.update(code, info);
+    console.log('서버 업데이트') 
   }
 
   return(

@@ -50,6 +50,7 @@ class ClientSocket{
 
   // 진행상황 업데이트
   update(code:string, info: Partial<GameInfoStateType>){
+    console.log('====== 서버 업데이트');
     this.socket.emit('updateServer', code, info);
   }
 

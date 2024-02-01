@@ -1,7 +1,7 @@
 import useReset from "components/reset/useReset";
 import { ReactNode, useEffect } from "react"
 import { useRecoilState } from "recoil";
-import { gameState, inputState, playerState, stageState, gameInfoState, roomState } from "recoil/stage";
+import { gameState, inputState, playerState, stageState, gameInfoState, roomState, scoreState } from "recoil/stage";
 import { GameStateType, InputStateType } from "recoil/type";
 import socket from "socket/socket";
 
@@ -12,9 +12,11 @@ const SocketWrapper = ({children} : {children: ReactNode}) => {
   const [game, setGame] = useRecoilState<GameStateType>(gameState);
   const [table, setTable] = useRecoilState<InputStateType>(inputState);
   const [roomCode, setRoomCode] = useRecoilState(roomState);
+  const [score, setScore] = useRecoilState(scoreState);
   const reset = useReset();
 
   useEffect(()=>{
+    console.log('wrapper 실행');
     // FUNCTION 클라이언트 데이터 업데이트
     socket.socket.on('updateClient', (data) => {
       console.log('=====update client=====');
@@ -23,6 +25,7 @@ const SocketWrapper = ({children} : {children: ReactNode}) => {
       setGameStage(data.stageState);
       setGame(data.gameState);
       setPlayer(data.turn);   
+      setScore(data.score);
     });
 
     socket.socket.on('resetClient', ()=>{

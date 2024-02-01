@@ -21,7 +21,9 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
   // FUNCTION 셀 클릭 시 실행
   const onClickCell = () => {
     if (!isMyTurn) return;
-    if (cellState !== null) return;
+    console.log(cellState);
+    if (!stage) return;
+    if (stage[rowNum][cellNum] !== null) return;
 
     const newTable = stage?.map((row, rowIdx) => 
       rowIdx === rowNum ? 
@@ -37,6 +39,7 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
       checkTable(newTable);
     }
     console.log(gameInfo);
+    console.log('onClickCell update')
     socket.update(gameInfo?.code || '', {
       ...gameInfo,
       turn: player === BLACK ? WHITE : BLACK,
@@ -54,19 +57,23 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
 
     let arr = [stage[rowNum], verticalArr, rightDiagonalArr, leftDiagonalArr];
 
-    arr.forEach((el) => {
-      if (getCheckVictory(el, player)){
+    for (let i =0; i<arr.length; i++){
+      if (getCheckVictory(arr[i], player)){
         const playerName = player === BLACK ? 'black' : 'white';
         const msg = `${playerName} 님이 승리하였습니다.`;
+        console.log('victory');
         const newScore = { ...score,
           [player]: score[player] + 1};
 
         setScore(newScore);
         socket.update(gameInfo?.code || '', {score: newScore});
+        console.log('서버 업데이트');
         socket.endGame(gameInfo?.code||'', gameInfo?.member||[], msg);
-        return;
+        socket.reset(gameInfo?.code || '');  
+        console.log('리셋'); 
+        break;
       }
-    });
+    }
 
     if (getIsFullStage(stage, stageLength)){
       const msg = `돌을 더 놓을 자리가 없습니다. 게임을 리셋합니다.`;
@@ -77,7 +84,7 @@ const Cell = ({rowNum, cellNum} : CellPropsType) => {
 
 
   return (
-    <C.Container onClick={onClickCell} state={cellState} isMyTurn={isMyTurn}>
+    <C.Container onClick={onClickCell} state={stage ? stage[rowNum][cellNum] : null} isMyTurn={isMyTurn}>
      {
        stage === null ? null :
       <>
