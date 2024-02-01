@@ -61,6 +61,7 @@ class ClientSocket{
     //   turn: BLACK
     // }
     // this.socket.emit('updateServer', code, newInfo);
+    console.log('send reset');
     const newScore = score || {};
     this.socket.emit('resetRoom', code, newScore);
   }
