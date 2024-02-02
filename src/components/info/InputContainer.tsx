@@ -64,7 +64,13 @@ const InputContainer = () => {
          </IC.Container>
          :
          <IC.Container>
-           Host가 설정 중입니다.
+          <IC.Loading.Container>
+            {/* <IC.Loading.Spinner></IC.Loading.Spinner> */}
+            {Array(3).fill('').map((el,idx)=>
+              <IC.Loading.Dot key={'dot'+idx}></IC.Loading.Dot>
+            )}
+          </IC.Loading.Container>
+          <IC.Loading.Text>Host가 설정 중입니다.</IC.Loading.Text>           
          </IC.Container>
       }
      </>
