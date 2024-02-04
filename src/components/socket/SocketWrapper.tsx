@@ -56,6 +56,7 @@ const SocketWrapper = ({children} : {children: ReactNode}) => {
   
      // FUNCTION 서버측에서 메세지 수신
       socket.socket.on('alertToClient', (msg) => {
+        console.log('메세지 수신');
         alert(msg);
       });
   }, [socket]);

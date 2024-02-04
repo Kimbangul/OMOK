@@ -7,7 +7,7 @@ class ClientSocket{
   socket: Socket;
   id: undefined | string;
   constructor(){
-    this.socket = io("http://127.0.0.1:8000", {
+    this.socket = io(process.env.REACT_APP_API_URL || '', {
       reconnectionDelayMax: 10000,
       withCredentials: true,
     });  
